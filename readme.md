@@ -1,3 +1,9 @@
+About this fork
+---------------
+
+This fork replaces the entirety of love's lua API to snake_case. So it should be noted this WILL break any libraries you use which utilise love, unless 
+they are re-written to use snake_case also.
+
 LÖVE is an *awesome* framework you can use to make 2D games in Lua. It's free, open-source, and works on Windows, macOS, Linux, Android, and iOS.
 
 [![Build Status: Github CI](https://github.com/love2d/love/workflows/continuous-integration/badge.svg)](https://github.com/love2d/love/actions?query=workflow%3Acontinuous-integration)
