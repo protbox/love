@@ -53,7 +53,7 @@ TestModule = {
   end,
 
 
-  -- @method - TestModule:runTests()
+  -- @method - TestModule:run_tests()
   -- @desc - starts the running of tests and sets up the list of methods to test
   -- @param {string} module - module to set for the test suite
   -- @param {string} method - specific method to test, if nil all methods tested
@@ -76,7 +76,7 @@ TestModule = {
   end,
 
 
-  -- @method - TestModule:printResult()
+  -- @method - TestModule:print_result()
   -- @desc - prints the result of the module to the console as well as appends
   --         the XML + HTML for the test to the testsuite output
   -- @return {nil}

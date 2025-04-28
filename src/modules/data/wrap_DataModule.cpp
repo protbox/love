@@ -418,8 +418,8 @@ int w_unpack(lua_State *L)
 // List of functions to wrap.
 static const luaL_Reg functions[] =
 {
-	{ "newDataView", w_newDataView },
-	{ "newByteData", w_newByteData },
+	{ "new_data_view", w_newDataView },
+	{ "new_byte_data", w_newByteData },
 	{ "compress", w_compress },
 	{ "decompress", w_decompress },
 	{ "encode", w_encode },
@@ -428,7 +428,7 @@ static const luaL_Reg functions[] =
 
 	{ "pack", w_pack },
 	{ "unpack", w_unpack },
-	{ "getPackedSize", lua53_str_packsize },
+	{ "get_packed_size", lua53_str_packsize },
 
 	{ 0, 0 }
 };

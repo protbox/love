@@ -126,14 +126,14 @@ int w_Rasterizer_hasGlyphs(lua_State *L)
 
 const luaL_Reg w_Rasterizer_functions[] =
 {
-	{ "getHeight", w_Rasterizer_getHeight },
-	{ "getAdvance", w_Rasterizer_getAdvance },
-	{ "getAscent", w_Rasterizer_getAscent },
-	{ "getDescent", w_Rasterizer_getDescent },
-	{ "getLineHeight", w_Rasterizer_getLineHeight },
-	{ "getGlyphData", w_Rasterizer_getGlyphData },
-	{ "getGlyphCount", w_Rasterizer_getGlyphCount },
-	{ "hasGlyphs", w_Rasterizer_hasGlyphs },
+	{ "get_height", w_Rasterizer_getHeight },
+	{ "get_advance", w_Rasterizer_getAdvance },
+	{ "get_ascent", w_Rasterizer_getAscent },
+	{ "get_descent", w_Rasterizer_getDescent },
+	{ "get_line_height", w_Rasterizer_getLineHeight },
+	{ "get_glyph_data", w_Rasterizer_getGlyphData },
+	{ "get_glyph_count", w_Rasterizer_getGlyphCount },
+	{ "has_glyphs", w_Rasterizer_hasGlyphs },
 	{ 0, 0 }
 };
 

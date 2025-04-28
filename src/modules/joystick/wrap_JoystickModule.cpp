@@ -174,12 +174,12 @@ int w_getGamepadMappingString(lua_State *L)
 // List of functions to wrap.
 static const luaL_Reg functions[] =
 {
-	{ "getJoysticks", w_getJoysticks },
-	{ "getJoystickCount", w_getJoystickCount },
-	{ "setGamepadMapping", w_setGamepadMapping },
-	{ "loadGamepadMappings", w_loadGamepadMappings },
-	{ "saveGamepadMappings", w_saveGamepadMappings },
-	{ "getGamepadMappingString", w_getGamepadMappingString },
+	{ "get_joysticks", w_getJoysticks },
+	{ "get_joystick_count", w_getJoystickCount },
+	{ "set_gamepad_mapping", w_setGamepadMapping },
+	{ "load_gamepad_mappings", w_loadGamepadMappings },
+	{ "save_gamepad_mappings", w_saveGamepadMappings },
+	{ "get_gamepad_mapping_string", w_getGamepadMappingString },
 	{ 0, 0 }
 };
 

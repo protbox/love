@@ -443,14 +443,14 @@ static int w_Buffer_getDebugName(lua_State *L)
 
 static const luaL_Reg w_Buffer_functions[] =
 {
-	{ "setArrayData", w_Buffer_setArrayData },
+	{ "set_array_data", w_Buffer_setArrayData },
 	{ "clear", w_Buffer_clear },
-	{ "getElementCount", w_Buffer_getElementCount },
-	{ "getElementStride", w_Buffer_getElementStride },
-	{ "getSize", w_Buffer_getSize },
-	{ "getFormat", w_Buffer_getFormat },
-	{ "isBufferType", w_Buffer_isBufferType },
-	{ "getDebugName", w_Buffer_getDebugName },
+	{ "get_element_count", w_Buffer_getElementCount },
+	{ "get_element_stride", w_Buffer_getElementStride },
+	{ "get_size", w_Buffer_getSize },
+	{ "get_format", w_Buffer_getFormat },
+	{ "is_buffer_type", w_Buffer_isBufferType },
+	{ "get_debug_name", w_Buffer_getDebugName },
 	{ 0, 0 }
 };
 

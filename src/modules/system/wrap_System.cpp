@@ -119,15 +119,15 @@ int w_getPreferredLocales(lua_State* L)
 
 static const luaL_Reg functions[] =
 {
-	{ "getOS", w_getOS },
-	{ "getProcessorCount", w_getProcessorCount },
-	{ "setClipboardText", w_setClipboardText },
-	{ "getClipboardText", w_getClipboardText },
-	{ "getPowerInfo", w_getPowerInfo },
-	{ "openURL", w_openURL },
+	{ "get_os", w_getOS },
+	{ "get_processor_count", w_getProcessorCount },
+	{ "set_clipboard_text", w_setClipboardText },
+	{ "get_clipboard_text", w_getClipboardText },
+	{ "get_power_info", w_getPowerInfo },
+	{ "open_url", w_openURL },
 	{ "vibrate", w_vibrate },
-	{ "hasBackgroundMusic", w_hasBackgroundMusic },
-	{ "getPreferredLocales", w_getPreferredLocales },
+	{ "has_background_music", w_hasBackgroundMusic },
+	{ "get_preferred_locales", w_getPreferredLocales },
 	{ 0, 0 }
 };
 

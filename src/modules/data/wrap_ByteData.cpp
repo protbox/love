@@ -138,15 +138,15 @@ int w_ByteData_setUInt32(lua_State *L)
 static const luaL_Reg w_ByteData_functions[] =
 {
 	{ "clone", w_ByteData_clone },
-	{ "setString", w_ByteData_setString },
-	{ "setFloat", w_ByteData_setFloat },
-	{ "setDouble", w_ByteData_setDouble },
-	{ "setInt8", w_ByteData_setInt8 },
-	{ "setUInt8", w_ByteData_setUInt8 },
-	{ "setInt16", w_ByteData_setInt16 },
-	{ "setUInt16", w_ByteData_setUInt16 },
-	{ "setInt32", w_ByteData_setInt32 },
-	{ "setUInt32", w_ByteData_setUInt32 },
+	{ "set_string", w_ByteData_setString },
+	{ "set_float", w_ByteData_setFloat },
+	{ "set_double", w_ByteData_setDouble },
+	{ "set_int8", w_ByteData_setInt8 },
+	{ "set_u_int8", w_ByteData_setUInt8 },
+	{ "set_int16", w_ByteData_setInt16 },
+	{ "set_u_int16", w_ByteData_setUInt16 },
+	{ "set_int32", w_ByteData_setInt32 },
+	{ "set_u_int32", w_ByteData_setUInt32 },
 	{ 0, 0 }
 };
 

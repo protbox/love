@@ -57,7 +57,7 @@ TestSuite = {
   end,
 
 
-  -- @method - TestSuite:runSuite()
+  -- @method - TestSuite:run_suite()
   -- @desc - called in love.update, runs through every method or every module
   -- @param {number} delta - delta from love.update to track time elapsed
   -- @return {nil}
@@ -95,7 +95,7 @@ TestSuite = {
             else
 
               -- move onto next yield if any
-              -- pauses can be set with TestMethod:waitFrames(frames)
+              -- pauses can be set with TestMethod:wait_frames(frames)
               coroutine.resume(self.test.co)
 
               -- when wait finished (or no yields)
@@ -118,17 +118,17 @@ TestSuite = {
           else
 
             -- print module results and add to output
-            self.module:printResult()
+            self.module:print_result()
 
             -- if we have more modules to go run the next one
             self.current = self.current + 1
             if #self.modules >= self.current then
               self.module = self.modules[self.current]
-              self.module:runTests()
+              self.module:run_tests()
 
             -- otherwise print the final results and export output
             else
-              self:printResult()
+              self:print_result()
               love.event.quit(0)
             end
 
@@ -139,7 +139,7 @@ TestSuite = {
   end,
 
 
-  -- @method - TestSuite:printResult()
+  -- @method - TestSuite:print_result()
   -- @desc - prints the result of the whole test suite as well as writes
   --         the MD, XML + HTML of the testsuite output
   -- @return {nil}
@@ -152,7 +152,7 @@ TestSuite = {
     local vendor = 'NONE'
     local device = 'NONE'
     if love.graphics then
-      name, version, vendor, device = love.graphics.getRendererInfo()
+      name, version, vendor, device = love.graphics.get_renderer_info()
     end
 
     local md = '<!-- PASSED ' .. tostring(self.totals[1]) ..

@@ -9,76 +9,76 @@
 --------------------------------------------------------------------------------
 
 
--- love.keyboard.getKeyFromScancode
-love.test.keyboard.getKeyFromScancode = function(test)
-  test:assertEquals('function', type(love.keyboard.getKeyFromScancode))
+-- love.keyboard.get_key_from_scancode
+love.test.keyboard.get_key_from_scancode = function(test)
+  test:assert_equals('function', type(love.keyboard.get_key_from_scancode))
 end
 
 
--- love.keyboard.getScancodeFromKey
-love.test.keyboard.getScancodeFromKey = function(test)
-  test:assertEquals('function', type(love.keyboard.getScancodeFromKey))
+-- love.keyboard.get_scancode_from_key
+love.test.keyboard.get_scancode_from_key = function(test)
+  test:assert_equals('function', type(love.keyboard.get_scancode_from_key))
 end
 
 
--- love.keyboard.hasKeyRepeat
-love.test.keyboard.hasKeyRepeat = function(test)
-  local enabled = love.keyboard.hasKeyRepeat()
-  test:assertNotNil(enabled)
+-- love.keyboard.has_key_repeat
+love.test.keyboard.has_key_repeat = function(test)
+  local enabled = love.keyboard.has_key_repeat()
+  test:assert_not_nil(enabled)
 end
 
 
--- love.keyboard.hasScreenKeyboard
-love.test.keyboard.hasScreenKeyboard = function(test)
-  local enabled = love.keyboard.hasScreenKeyboard()
-  test:assertNotNil(enabled)
+-- love.keyboard.has_screen_keyboard
+love.test.keyboard.has_screen_keyboard = function(test)
+  local enabled = love.keyboard.has_screen_keyboard()
+  test:assert_not_nil(enabled)
 end
 
 
--- love.keyboard.hasTextInput
-love.test.keyboard.hasTextInput = function(test)
-  local enabled = love.keyboard.hasTextInput()
-  test:assertNotNil(enabled)
+-- love.keyboard.has_text_input
+love.test.keyboard.has_text_input = function(test)
+  local enabled = love.keyboard.has_text_input()
+  test:assert_not_nil(enabled)
 end
 
 
--- love.keyboard.isDown
-love.test.keyboard.isDown = function(test)
-  local keydown = love.keyboard.isDown('a')
-  test:assertNotNil(keydown)
+-- love.keyboard.is_down
+love.test.keyboard.is_down = function(test)
+  local keydown = love.keyboard.is_down('a')
+  test:assert_not_nil(keydown)
 end
 
 
--- love.keyboard.isScancodeDown
-love.test.keyboard.isScancodeDown = function(test)
-  local keydown = love.keyboard.isScancodeDown('a')
-  test:assertNotNil(keydown)
+-- love.keyboard.is_scancode_down
+love.test.keyboard.is_scancode_down = function(test)
+  local keydown = love.keyboard.is_scancode_down('a')
+  test:assert_not_nil(keydown)
 end
 
 
--- love.keyboard.setKeyRepeat
-love.test.keyboard.setKeyRepeat = function(test)
-  love.keyboard.setKeyRepeat(true)
-  local enabled = love.keyboard.hasKeyRepeat()
-  test:assertEquals(true, enabled, 'check key repeat set')
+-- love.keyboard.set_key_repeat
+love.test.keyboard.set_key_repeat = function(test)
+  love.keyboard.set_key_repeat(true)
+  local enabled = love.keyboard.has_key_repeat()
+  test:assert_equals(true, enabled, 'check key repeat set')
 end
 
 
--- love.keyboard.isModifierActive
-love.test.keyboard.isModifierActive = function(test)
-  local active1 = love.keyboard.isModifierActive('numlock')
-  local active2 = love.keyboard.isModifierActive('capslock')
-  local active3 = love.keyboard.isModifierActive('scrolllock')
-  local active4 = love.keyboard.isModifierActive('mode')
-  test:assertNotNil(active1)
-  test:assertNotNil(active2)
-  test:assertNotNil(active3)
-  test:assertNotNil(active4)
+-- love.keyboard.is_modifier_active
+love.test.keyboard.is_modifier_active = function(test)
+  local active1 = love.keyboard.is_modifier_active('numlock')
+  local active2 = love.keyboard.is_modifier_active('capslock')
+  local active3 = love.keyboard.is_modifier_active('scrolllock')
+  local active4 = love.keyboard.is_modifier_active('mode')
+  test:assert_not_nil(active1)
+  test:assert_not_nil(active2)
+  test:assert_not_nil(active3)
+  test:assert_not_nil(active4)
 end
 
 
--- love.keyboard.setTextInput
-love.test.keyboard.setTextInput = function(test)
-  love.keyboard.setTextInput(false)
-  test:assertEquals(false, love.keyboard.hasTextInput(), 'check disable text input')
+-- love.keyboard.set_text_input
+love.test.keyboard.set_text_input = function(test)
+  love.keyboard.set_text_input(false)
+  test:assert_equals(false, love.keyboard.has_text_input(), 'check disable text input')
 end

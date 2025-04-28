@@ -65,10 +65,10 @@ int w_PulleyJoint_getRatio(lua_State *L)
 
 static const luaL_Reg w_PulleyJoint_functions[] =
 {
-	{ "getGroundAnchors", w_PulleyJoint_getGroundAnchors },
-	{ "getLengthA", w_PulleyJoint_getLengthA },
-	{ "getLengthB", w_PulleyJoint_getLengthB },
-	{ "getRatio", w_PulleyJoint_getRatio },
+	{ "get_ground_anchors", w_PulleyJoint_getGroundAnchors },
+	{ "get_length_a", w_PulleyJoint_getLengthA },
+	{ "get_length_b", w_PulleyJoint_getLengthB },
+	{ "get_ratio", w_PulleyJoint_getRatio },
 	{ 0, 0 }
 };
 

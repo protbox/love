@@ -109,10 +109,10 @@ int w_Decoder_seek(lua_State *L)
 static const luaL_Reg w_Decoder_functions[] =
 {
 	{ "clone", w_Decoder_clone },
-	{ "getChannelCount", w_Decoder_getChannelCount },
-	{ "getBitDepth", w_Decoder_getBitDepth },
-	{ "getSampleRate", w_Decoder_getSampleRate },
-	{ "getDuration", w_Decoder_getDuration },
+	{ "get_channel_count", w_Decoder_getChannelCount },
+	{ "get_bit_depth", w_Decoder_getBitDepth },
+	{ "get_sample_rate", w_Decoder_getSampleRate },
+	{ "get_duration", w_Decoder_getDuration },
 	{ "decode", w_Decoder_decode },
 	{ "seek", w_Decoder_seek },
 

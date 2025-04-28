@@ -100,9 +100,9 @@ int w_getChannel(lua_State *L)
 // List of functions to wrap.
 static const luaL_Reg module_functions[] =
 {
-	{ "newThread", w_newThread },
-	{ "newChannel", w_newChannel },
-	{ "getChannel", w_getChannel },
+	{ "new_thread", w_newThread },
+	{ "new_channel", w_newChannel },
+	{ "get_channel", w_getChannel },
 	{ 0, 0 }
 };
 

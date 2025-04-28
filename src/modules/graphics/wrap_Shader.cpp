@@ -562,14 +562,14 @@ int w_Shader_getDebugName(lua_State *L)
 
 static const luaL_Reg w_Shader_functions[] =
 {
-	{ "getWarnings",             w_Shader_getWarnings },
+	{ "get_warnings", w_Shader_getWarnings },
 	{ "send",                    w_Shader_send },
-	{ "sendColor",               w_Shader_sendColors },
-	{ "hasUniform",              w_Shader_hasUniform },
-	{ "hasStage",                w_Shader_hasStage },
-	{ "getLocalThreadgroupSize", w_Shader_getLocalThreadgroupSize },
-	{ "getBufferFormat",         w_Shader_getBufferFormat },
-	{ "getDebugName",            w_Shader_getDebugName },
+	{ "send_color", w_Shader_sendColors },
+	{ "has_uniform", w_Shader_hasUniform },
+	{ "has_stage", w_Shader_hasStage },
+	{ "get_local_threadgroup_size", w_Shader_getLocalThreadgroupSize },
+	{ "get_buffer_format", w_Shader_getBufferFormat },
+	{ "get_debug_name", w_Shader_getDebugName },
 	{ 0, 0 }
 };
 

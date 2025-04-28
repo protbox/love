@@ -79,7 +79,7 @@ function RandomGenerator:random(l, u)
 	return getrandom(r, l, u)
 end
 
-function RandomGenerator:randomNormal(stddev, mean)
+function RandomGenerator:random_normal(stddev, mean)
 	-- TODO: This should ideally be handled inside ffifuncs.randomNormal
 	if self == nil then error("bad argument #1 to 'randomNormal' (RandomGenerator expected, got no value)", 2) end
 

@@ -177,19 +177,19 @@ static FFI_Data ffifuncs =
 
 const luaL_Reg w_Data_functions[] =
 {
-	{ "getString", w_Data_getString },
-	{ "getPointer", w_Data_getPointer },
-	{ "getFFIPointer", w_Data_getFFIPointer },
-	{ "getSize", w_Data_getSize },
-	{ "performAtomic", w_Data_performAtomic },
-	{ "getFloat", w_Data_getFloat },
-	{ "getDouble", w_Data_getDouble },
-	{ "getInt8", w_Data_getInt8 },
-	{ "getUInt8", w_Data_getUInt8 },
-	{ "getInt16", w_Data_getInt16 },
-	{ "getUInt16", w_Data_getUInt16 },
-	{ "getInt32", w_Data_getInt32 },
-	{ "getUInt32", w_Data_getUInt32 },
+	{ "get_string", w_Data_getString },
+	{ "get_pointer", w_Data_getPointer },
+	{ "get_ffi_pointer", w_Data_getFFIPointer },
+	{ "get_size", w_Data_getSize },
+	{ "perform_atomic", w_Data_performAtomic },
+	{ "get_float", w_Data_getFloat },
+	{ "get_double", w_Data_getDouble },
+	{ "get_int8", w_Data_getInt8 },
+	{ "get_u_int8", w_Data_getUInt8 },
+	{ "get_int16", w_Data_getInt16 },
+	{ "get_u_int16", w_Data_getUInt16 },
+	{ "get_int32", w_Data_getInt32 },
+	{ "get_u_int32", w_Data_getUInt32 },
 	{ 0, 0 }
 };
 

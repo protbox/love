@@ -8,26 +8,26 @@
 --------------------------------------------------------------------------------
 
 
--- VideoStream (love.thread.newVideoStream)
+-- VideoStream (love.thread.new_video_stream)
 love.test.video.VideoStream = function(test)
 
   -- create obj
-  local video = love.video.newVideoStream('resources/sample.ogv')
-  test:assertObject(video)
+  local video = love.video.new_video_stream('resources/sample.ogv')
+  test:assert_object(video)
 
   -- check def properties
-  test:assertEquals('resources/sample.ogv', video:getFilename(), 'check filename')
-  test:assertFalse(video:isPlaying(), 'check not playing by def')
+  test:assert_equals('resources/sample.ogv', video:get_filename(), 'check filename')
+  test:assert_false(video:is_playing(), 'check not playing by def')
 
   -- check playing and pausing states
   video:play()
-  test:assertTrue(video:isPlaying(), 'check now playing')
+  test:assert_true(video:is_playing(), 'check now playing')
   video:seek(0.3)
-  test:assertRange(video:tell(), 0.3, 0.4, 'check seek/tell')
+  test:assert_range(video:tell(), 0.3, 0.4, 'check seek/tell')
   video:rewind()
-  test:assertRange(video:tell(), 0, 0.1, 'check rewind')
+  test:assert_range(video:tell(), 0, 0.1, 'check rewind')
   video:pause()
-  test:assertFalse(video:isPlaying(), 'check paused')
+  test:assert_false(video:is_playing(), 'check paused')
 
 end
 
@@ -39,8 +39,8 @@ end
 --------------------------------------------------------------------------------
 
 
--- love.video.newVideoStream
+-- love.video.new_video_stream
 -- @NOTE this is just basic nil checking, objs have their own test method
-love.test.video.newVideoStream = function(test)
-  test:assertObject(love.video.newVideoStream('resources/sample.ogv'))
+love.test.video.new_video_stream = function(test)
+  test:assert_object(love.video.new_video_stream('resources/sample.ogv'))
 end

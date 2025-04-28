@@ -215,20 +215,20 @@ int w_BezierCurve_renderSegment(lua_State *L)
 
 static const luaL_Reg w_BezierCurve_functions[] =
 {
-	{"getDegree", w_BezierCurve_getDegree},
-	{"getDerivative", w_BezierCurve_getDerivative},
-	{"getControlPoint", w_BezierCurve_getControlPoint},
-	{"setControlPoint", w_BezierCurve_setControlPoint},
-	{"insertControlPoint", w_BezierCurve_insertControlPoint},
-	{"removeControlPoint", w_BezierCurve_removeControlPoint},
-	{"getControlPointCount", w_BezierCurve_getControlPointCount},
+	{ "get_degree", w_BezierCurve_getDegree },
+	{ "get_derivative", w_BezierCurve_getDerivative },
+	{ "get_control_point", w_BezierCurve_getControlPoint },
+	{ "set_control_point", w_BezierCurve_setControlPoint },
+	{ "insert_control_point", w_BezierCurve_insertControlPoint },
+	{ "remove_control_point", w_BezierCurve_removeControlPoint },
+	{ "get_control_point_count", w_BezierCurve_getControlPointCount },
 	{"translate", w_BezierCurve_translate},
 	{"rotate", w_BezierCurve_rotate},
 	{"scale", w_BezierCurve_scale},
 	{"evaluate", w_BezierCurve_evaluate},
-	{"getSegment", w_BezierCurve_getSegment},
+	{ "get_segment", w_BezierCurve_getSegment },
 	{"render", w_BezierCurve_render},
-	{"renderSegment", w_BezierCurve_renderSegment},
+	{ "render_segment", w_BezierCurve_renderSegment },
 	{ 0, 0 }
 };
 

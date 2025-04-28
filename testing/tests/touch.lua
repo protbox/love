@@ -9,23 +9,23 @@
 --------------------------------------------------------------------------------
 
 
--- love.touch.getPosition
+-- love.touch.get_position
 -- @TODO is there a way to fake the touchid pointer?
-love.test.touch.getPosition = function(test)
-  test:assertNotNil(love.touch.getPosition)
-  test:assertEquals('function', type(love.touch.getPosition))
+love.test.touch.get_position = function(test)
+  test:assert_not_nil(love.touch.get_position)
+  test:assert_equals('function', type(love.touch.get_position))
 end
 
 
--- love.touch.getPressure
+-- love.touch.get_pressure
 -- @TODO is there a way to fake the touchid pointer?
-love.test.touch.getPressure = function(test)
-  test:assertNotNil(love.touch.getPressure)
-  test:assertEquals('function', type(love.touch.getPressure))
+love.test.touch.get_pressure = function(test)
+  test:assert_not_nil(love.touch.get_pressure)
+  test:assert_equals('function', type(love.touch.get_pressure))
 end
 
 
--- love.touch.getTouches
-love.test.touch.getTouches = function(test)
-  test:assertEquals('function', type(love.touch.getTouches))
+-- love.touch.get_touches
+love.test.touch.get_touches = function(test)
+  test:assert_equals('function', type(love.touch.get_touches))
 end

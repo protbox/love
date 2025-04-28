@@ -8,45 +8,45 @@
 --------------------------------------------------------------------------------
 
 
--- love.timer.getAverageDelta
+-- love.timer.get_average_delta
 -- @NOTE not sure if you could reliably get a specific delta?
-love.test.timer.getAverageDelta = function(test)
-  test:assertNotNil(love.timer.getAverageDelta())
+love.test.timer.get_average_delta = function(test)
+  test:assert_not_nil(love.timer.get_average_delta())
 end
 
--- love.timer.getDelta
+-- love.timer.get_delta
 -- @NOTE not sure if you could reliably get a specific delta?
-love.test.timer.getDelta = function(test)
-  test:assertNotNil(love.timer.getDelta())
+love.test.timer.get_delta = function(test)
+  test:assert_not_nil(love.timer.get_delta())
 end
 
 
--- love.timer.getFPS
+-- love.timer.get_fps
 -- @NOTE not sure if you could reliably get a specific FPS?
-love.test.timer.getFPS = function(test)
-  test:assertNotNil(love.timer.getFPS())
+love.test.timer.get_fps = function(test)
+  test:assert_not_nil(love.timer.get_fps())
 end
 
 
--- love.timer.getTime
-love.test.timer.getTime = function(test)
-  local starttime = love.timer.getTime()
+-- love.timer.get_time
+love.test.timer.get_time = function(test)
+  local starttime = love.timer.get_time()
   love.timer.sleep(0.1)
-  local endtime = love.timer.getTime() - starttime
-  test:assertRange(endtime, 0.05, 1, 'check 0.1s passes')
+  local endtime = love.timer.get_time() - starttime
+  test:assert_range(endtime, 0.05, 1, 'check 0.1s passes')
 end
 
 
 -- love.timer.sleep
 love.test.timer.sleep = function(test)
-  local starttime = love.timer.getTime()
+  local starttime = love.timer.get_time()
   love.timer.sleep(0.1)
-  test:assertRange(love.timer.getTime() - starttime, 0.05, 1, 'check 0.1s passes')
+  test:assert_range(love.timer.get_time() - starttime, 0.05, 1, 'check 0.1s passes')
 end
 
 
 -- love.timer.step
 -- @NOTE not sure if you could reliably get a specific step val?
 love.test.timer.step = function(test)
-  test:assertNotNil(love.timer.step())
+  test:assert_not_nil(love.timer.step())
 end

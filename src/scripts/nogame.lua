@@ -2879,9 +2879,9 @@ function love.nogame()
 
 	function State:init(body)
 		self.t0 = 0
-		self.x0 = body:getX()
-		self.y0 = body:getY()
-		self.r0 = body:getAngle()
+		self.x0 = body:get_x()
+		self.y0 = body:get_y()
+		self.r0 = body:get_angle()
 
 		self.t1 = self.t0
 		self.x1 = self.x0
@@ -2897,9 +2897,9 @@ function love.nogame()
 		self.r0 = self.r1
 
 		self.t1 = t
-		self.x1 = body:getX()
-		self.y1 = body:getY()
-		self.r1 = body:getAngle()
+		self.x1 = body:get_x()
+		self.y1 = body:get_y()
+		self.r1 = body:get_angle()
 	end
 
 	function State:get(t)
@@ -2945,16 +2945,16 @@ function love.nogame()
 	local Duckloon = class("Duckloon")
 
 	function Duckloon:init(world, x, y)
-		self.body = love.physics.newBody(world, x, y, "dynamic")
-		self.body:setLinearDamping(0.8)
-		self.body:setAngularDamping(0.8)
-		self.shape = love.physics.newPolygonShape(self.body, -55, -60, 0, 90, 55, -60)
-		self.shape:setRestitution(0.5)
+		self.body = love.physics.new_body(world, x, y, "dynamic")
+		self.body:set_linear_damping(0.8)
+		self.body:set_angular_damping(0.8)
+		self.shape = love.physics.new_polygon_shape(self.body, -55, -60, 0, 90, 55, -60)
+		self.shape:set_restitution(0.5)
 		self.img_normal = img_duckloon_normal
 		self.img_blink = img_duckloon_blink
 		self.img = self.img_normal
 		self.blink = Blink()
-		self.pin = love.physics.newMouseJoint(self.body, x, y - 80)
+		self.pin = love.physics.new_mouse_joint(self.body, x, y - 80)
 		self.state = State(self.body)
 	end
 
@@ -2962,7 +2962,7 @@ function love.nogame()
 		self.state:save(self.body, g_step)
 
 		if math.floor(g_step % 5) == 0 then
-			self.body:applyForce(love.math.random(30, 50), 0)
+			self.body:apply_force(love.math.random(30, 50), 0)
 		end
 	end
 
@@ -2973,20 +2973,20 @@ function love.nogame()
 	function Duckloon:draw()
 		local x, y, r = self.state:get(g_t)
 
-		love.graphics.setColor(1, 1, 1)
+		love.graphics.set_color(1, 1, 1)
 
 		local img = self.img_normal
 		if self.blink:is_closed() then
 			img = self.img_blink
 		end
 
-		love.graphics.draw(img, x, y, r, 1, 1, img:getWidth() / 2, img:getHeight() / 2)
+		love.graphics.draw(img, x, y, r, 1, 1, img:get_width() / 2, img:get_height() / 2)
 
 		if DEBUG then
-			love.graphics.setColor(0.8, 0.3, 0.1)
-			love.graphics.polygon("fill", self.body:getWorldPoints(self.shape:getPoints()))
+			love.graphics.set_color(0.8, 0.3, 0.1)
+			love.graphics.polygon("fill", self.body:get_world_points(self.shape:get_points()))
 
-			love.graphics.setColor(0, 1, 0)
+			love.graphics.set_color(0, 1, 0)
 			local ax, ay = self:attachment_point()
 			love.graphics.circle("fill", ax, ay, 3)
 		end
@@ -2994,7 +2994,7 @@ function love.nogame()
 
 	-- This is where to attach the Chain.
 	function Duckloon:attachment_point()
-		return self.body:getWorldPoint(4, 90)
+		return self.body:get_world_point(4, 90)
 	end
 
 	-- The chain is built from a string containing "# nogame",
@@ -3037,21 +3037,21 @@ function love.nogame()
 				link.y = prev.y + prev.radius + link.radius
 			end
 
-			link.body = love.physics.newBody(world, link.x, link.y, "dynamic")
-			link.body:setLinearDamping(0.5)
-			link.body:setAngularDamping(0.5)
-			link.shape = love.physics.newCircleShape(link.body, link.radius)
-			link.shape:setDensity(0.1 / i)
+			link.body = love.physics.new_body(world, link.x, link.y, "dynamic")
+			link.body:set_linear_damping(0.5)
+			link.body:set_angular_damping(0.5)
+			link.shape = love.physics.new_circle_shape(link.body, link.radius)
+			link.shape:set_density(0.1 / i)
 			link.state = State(link.body)
 
 			-- Note: every link must also be attached to the Duckloon. Otherwise the
 			--       chain easily goes haywire on higher speeds.
 
 			if prev ~= nil then
-				link.joint = love.physics.newRevoluteJoint(link.body, prev.body, link.x, link.y - link.radius / 2)
-				link.join2 = love.physics.newRopeJoint(link.body, duckloon.body, link.x, link.y, x, y, link.y - y)
+				link.joint = love.physics.new_revolute_joint(link.body, prev.body, link.x, link.y - link.radius / 2)
+				link.join2 = love.physics.new_rope_joint(link.body, duckloon.body, link.x, link.y, x, y, link.y - y)
 			else
-				link.joint = love.physics.newRevoluteJoint(link.body, duckloon.body, link.x, link.y)
+				link.joint = love.physics.new_revolute_joint(link.body, duckloon.body, link.x, link.y)
 			end
 
 			table.insert(self.links, link)
@@ -3077,24 +3077,24 @@ function love.nogame()
 			table.insert(rope, y)
 		end
 
-		love.graphics.setLineWidth(3)
-		love.graphics.setColor(1, 1, 1, 0.7)
+		love.graphics.set_line_width(3)
+		love.graphics.set_color(1, 1, 1, 0.7)
 		love.graphics.line(rope)
 
 		for i, link in ipairs(self.links) do
 			if link.info.img ~= nil then
 				local x, y, r = link.state:get(g_t)
-				local ox, oy = link.info.img:getWidth() / 2, link.info.img:getHeight() / 2
-				love.graphics.setColor(1, 1, 1)
+				local ox, oy = link.info.img:get_width() / 2, link.info.img:get_height() / 2
+				love.graphics.set_color(1, 1, 1)
 				love.graphics.draw(link.info.img, x, y, r, 1, 1, ox, oy)
 			end
 		end
 
 		if DEBUG then
 			for i, link in ipairs(self.links) do
-				love.graphics.setColor(1, 0, 1)
-				local x, y = link.body:getPosition()
-				love.graphics.circle("fill", x, y, link.shape:getRadius())
+				love.graphics.set_color(1, 0, 1)
+				local x, y = link.body:get_position()
+				love.graphics.circle("fill", x, y, link.shape:get_radius())
 			end
 		end
 	end
@@ -3110,9 +3110,9 @@ function love.nogame()
 		self.initial_offset = offset
 		self.h_spacing = 50
 		self.img = img
-		self.w = self.h_spacing + self.img:getWidth()
+		self.w = self.h_spacing + self.img:get_width()
 		self.speed = speed -- px/s
-		self.count = love.graphics.getWidth() / self.w + 2
+		self.count = love.graphics.get_width() / self.w + 2
 		self.initial_img = love.math.random(1, 4)
 	end
 
@@ -3122,9 +3122,9 @@ function love.nogame()
 	function CloudTrack:draw()
 		local abs_offset = (self.initial_offset + (self.speed * g_t))
 		local offset = abs_offset % self.w
-		love.graphics.setColor(1, 1, 1, 0.3)
+		love.graphics.set_color(1, 1, 1, 0.3)
 		for i=1, self.count do
-			local x = self.x + (i - 1) * (self.img:getWidth() + self.h_spacing) + offset - self.w
+			local x = self.x + (i - 1) * (self.img:get_width() + self.h_spacing) + offset - self.w
 			local y = self.y
 			local img_no =  math.floor(abs_offset / self.w)
 			love.graphics.draw(cloud_images[1 + (self.initial_img + i - img_no) % 4], x, y, -0.05)
@@ -3137,9 +3137,9 @@ function love.nogame()
 		local layer_height = 100
 
 		self.tracks = {}
-		local max = (love.graphics.getHeight() / layer_height) + 1
+		local max = (love.graphics.get_height() / layer_height) + 1
 		for i=1, max do
-			table.insert(self.tracks, CloudTrack(0, 20 + (i - 1) * layer_height, img_cloud_1:getWidth() / 2 * i, 40, img_cloud_1))
+			table.insert(self.tracks, CloudTrack(0, 20 + (i - 1) * layer_height, img_cloud_1:get_width() / 2 * i, 40, img_cloud_1))
 		end
 	end
 
@@ -3151,10 +3151,10 @@ function love.nogame()
 
 	-- Called on resize.
 	function create_world()
-		love.math.setRandomSeed(12345)
+		love.math.set_random_seed(12345)
 
-		local wx, wy = love.graphics.getDimensions()
-		world = love.physics.newWorld(0, 9.81*64)
+		local wx, wy = love.graphics.get_dimensions()
+		world = love.physics.new_world(0, 9.81*64)
 		duckloon = Duckloon(world, wx / 2, wy / 2 - 100)
 		local ax, ay = duckloon:attachment_point()
 		chain = Chain(world, ax, ay, "  n o # g a m e # ", duckloon)
@@ -3167,13 +3167,13 @@ function love.nogame()
 	end
 
 	function love.load()
-		local renderername = love.graphics.getRendererInfo()
-		love.window.setTitle(love.window.getTitle() .. " - " .. renderername)
+		local renderername = love.graphics.get_renderer_info()
+		love.window.set_title(love.window.get_title() .. " - " .. renderername)
 
-		love.graphics.setBackgroundColor(43/255, 165/255, 223/255)
-		love.physics.setMeter(64)
+		love.graphics.set_background_color(43/255, 165/255, 223/255)
+		love.physics.set_meter(64)
 
-		local dpiscale = love.window.getDPIScale() > 1 and 2 or 1
+		local dpiscale = love.window.get_dpi_scale() > 1 and 2 or 1
 		local settings = {dpiscale = dpiscale}
 
 		R.chain.n = R.chain[dpiscale].n_png
@@ -3190,21 +3190,21 @@ function love.nogame()
 		R.bg.cloud_3 = R.bg[dpiscale].cloud_3_png
 		R.bg.cloud_4 = R.bg[dpiscale].cloud_4_png
 
-		img_duckloon_normal = love.graphics.newTexture(R.duckloon.normal, settings)
-		img_duckloon_blink = love.graphics.newTexture(R.duckloon.blink, settings)
+		img_duckloon_normal = love.graphics.new_texture(R.duckloon.normal, settings)
+		img_duckloon_blink = love.graphics.new_texture(R.duckloon.blink, settings)
 
-		img_n = love.graphics.newTexture(R.chain.n, settings)
-		img_o = love.graphics.newTexture(R.chain.o, settings)
-		img_g = love.graphics.newTexture(R.chain.g, settings)
-		img_a = love.graphics.newTexture(R.chain.a, settings)
-		img_m = love.graphics.newTexture(R.chain.m, settings)
-		img_e = love.graphics.newTexture(R.chain.e, settings)
-		img_square = love.graphics.newTexture(R.chain.square, settings)
+		img_n = love.graphics.new_texture(R.chain.n, settings)
+		img_o = love.graphics.new_texture(R.chain.o, settings)
+		img_g = love.graphics.new_texture(R.chain.g, settings)
+		img_a = love.graphics.new_texture(R.chain.a, settings)
+		img_m = love.graphics.new_texture(R.chain.m, settings)
+		img_e = love.graphics.new_texture(R.chain.e, settings)
+		img_square = love.graphics.new_texture(R.chain.square, settings)
 
-		img_cloud_1 = love.graphics.newTexture(R.bg.cloud_1, settings)
-		img_cloud_2 = love.graphics.newTexture(R.bg.cloud_2, settings)
-		img_cloud_3 = love.graphics.newTexture(R.bg.cloud_3, settings)
-		img_cloud_4 = love.graphics.newTexture(R.bg.cloud_4, settings)
+		img_cloud_1 = love.graphics.new_texture(R.bg.cloud_1, settings)
+		img_cloud_2 = love.graphics.new_texture(R.bg.cloud_2, settings)
+		img_cloud_3 = love.graphics.new_texture(R.bg.cloud_3, settings)
+		img_cloud_4 = love.graphics.new_texture(R.bg.cloud_4, settings)
 
 		cloud_images = {
 			img_cloud_1,
@@ -3241,8 +3241,8 @@ function love.nogame()
 		end
 
 		if DEBUG then
-			love.graphics.setColor(0, 0, 0, 0.5)
-			love.graphics.print("FPS: " .. love.timer.getFPS(), 50, 50)
+			love.graphics.set_color(0, 0, 0, 0.5)
+			love.graphics.print("FPS: " .. love.timer.get_fps(), 50, 50)
 			love.graphics.print("Time: " .. g_t, 50, 65)
 			love.graphics.print("g_step: " .. g_step, 50, 80)
 			love.graphics.print("Frame: " .. g_frame_count, 50, 95)
@@ -3255,7 +3255,7 @@ function love.nogame()
 	function love.mousepressed(x, y, b, istouch, clicks)
 		-- Double-tap the screen (when using a touch screen) to exit.
 		if istouch and clicks == 2 then
-			if love.window.showMessageBox("Exit No-Game Screen", "", {"OK", "Cancel"}) == 1 then
+			if love.window.show_message_box("Exit No-Game Screen", "", {"OK", "Cancel"}) == 1 then
 				love.event.quit()
 			end
 		end

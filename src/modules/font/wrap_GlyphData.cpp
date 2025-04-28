@@ -127,15 +127,15 @@ int w_GlyphData_getFormat(lua_State *L)
 const luaL_Reg w_GlyphData_functions[] =
 {
 	{ "clone", w_GlyphData_clone },
-	{ "getWidth", w_GlyphData_getWidth },
-	{ "getHeight", w_GlyphData_getHeight },
-	{ "getDimensions", w_GlyphData_getDimensions },
-	{ "getGlyph", w_GlyphData_getGlyph },
-	{ "getGlyphString", w_GlyphData_getGlyphString },
-	{ "getAdvance", w_GlyphData_getAdvance },
-	{ "getBearing", w_GlyphData_getBearing },
-	{ "getBoundingBox", w_GlyphData_getBoundingBox },
-	{ "getFormat", w_GlyphData_getFormat },
+	{ "get_width", w_GlyphData_getWidth },
+	{ "get_height", w_GlyphData_getHeight },
+	{ "get_dimensions", w_GlyphData_getDimensions },
+	{ "get_glyph", w_GlyphData_getGlyph },
+	{ "get_glyph_string", w_GlyphData_getGlyphString },
+	{ "get_advance", w_GlyphData_getAdvance },
+	{ "get_bearing", w_GlyphData_getBearing },
+	{ "get_bounding_box", w_GlyphData_getBoundingBox },
+	{ "get_format", w_GlyphData_getFormat },
 	{ 0, 0 }
 };
 

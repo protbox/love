@@ -81,11 +81,11 @@ int w_EdgeShape_getPoints(lua_State *L)
 
 static const luaL_Reg w_EdgeShape_functions[] =
 {
-	{ "setNextVertex", w_EdgeShape_setNextVertex },
-	{ "setPreviousVertex", w_EdgeShape_setPreviousVertex },
-	{ "getNextVertex", w_EdgeShape_getNextVertex },
-	{ "getPreviousVertex", w_EdgeShape_getPreviousVertex },
-	{ "getPoints", w_EdgeShape_getPoints },
+	{ "set_next_vertex", w_EdgeShape_setNextVertex },
+	{ "set_previous_vertex", w_EdgeShape_setPreviousVertex },
+	{ "get_next_vertex", w_EdgeShape_getNextVertex },
+	{ "get_previous_vertex", w_EdgeShape_getPreviousVertex },
+	{ "get_points", w_EdgeShape_getPoints },
 	{ 0, 0 }
 };
 

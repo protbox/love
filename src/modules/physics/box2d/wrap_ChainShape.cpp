@@ -123,14 +123,14 @@ int w_ChainShape_getPoints(lua_State *L)
 
 static const luaL_Reg w_ChainShape_functions[] =
 {
-	{ "setNextVertex", w_ChainShape_setNextVertex },
-	{ "setPreviousVertex", w_ChainShape_setPreviousVertex },
-	{ "getNextVertex", w_ChainShape_getNextVertex },
-	{ "getPreviousVertex", w_ChainShape_getPreviousVertex },
-	{ "getChildEdge", w_ChainShape_getChildEdge },
-	{ "getVertexCount", w_ChainShape_getVertexCount },
-	{ "getPoint", w_ChainShape_getPoint },
-	{ "getPoints", w_ChainShape_getPoints },
+	{ "set_next_vertex", w_ChainShape_setNextVertex },
+	{ "set_previous_vertex", w_ChainShape_setPreviousVertex },
+	{ "get_next_vertex", w_ChainShape_getNextVertex },
+	{ "get_previous_vertex", w_ChainShape_getPreviousVertex },
+	{ "get_child_edge", w_ChainShape_getChildEdge },
+	{ "get_vertex_count", w_ChainShape_getVertexCount },
+	{ "get_point", w_ChainShape_getPoint },
+	{ "get_points", w_ChainShape_getPoints },
 	{ 0, 0 }
 };
 

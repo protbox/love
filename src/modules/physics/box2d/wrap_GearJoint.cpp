@@ -69,9 +69,9 @@ int w_GearJoint_getJoints(lua_State *L)
 
 static const luaL_Reg w_GearJoint_functions[] =
 {
-	{ "setRatio", w_GearJoint_setRatio },
-	{ "getRatio", w_GearJoint_getRatio },
-	{ "getJoints", w_GearJoint_getJoints },
+	{ "set_ratio", w_GearJoint_setRatio },
+	{ "get_ratio", w_GearJoint_getRatio },
+	{ "get_joints", w_GearJoint_getJoints },
 	{ 0, 0 }
 };
 

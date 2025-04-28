@@ -59,7 +59,7 @@ static const lua_CFunction types[] =
 
 static const luaL_Reg functions[] =
 {
-	{ "newVideoStream", w_newVideoStream },
+	{ "new_video_stream", w_newVideoStream },
 	{ 0, 0 }
 };
 

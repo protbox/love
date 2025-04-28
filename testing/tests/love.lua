@@ -9,46 +9,46 @@
 
 
 -- love.getVersion
-love.test.love.getVersion = function(test)
+love.test.love.get_version = function(test)
   local major, minor, revision, codename = love.getVersion()
-  test:assertGreaterEqual(0, major, 'check major is number')
-  test:assertGreaterEqual(0, minor, 'check minor is number')
-  test:assertGreaterEqual(0, revision, 'check revision is number')
-  test:assertTrue(codename ~= nil, 'check has codename')
+  test:assert_greater_equal(0, major, 'check major is number')
+  test:assert_greater_equal(0, minor, 'check minor is number')
+  test:assert_greater_equal(0, revision, 'check revision is number')
+  test:assert_true(codename ~= nil, 'check has codename')
 end
 
 
 -- love.hasDeprecationOutput
-love.test.love.hasDeprecationOutput = function(test)
+love.test.love.has_deprecation_output = function(test)
   local enabled = love.hasDeprecationOutput()
-  test:assertEquals(true, enabled, 'check enabled by default')
+  test:assert_equals(true, enabled, 'check enabled by default')
 end
 
 
 -- love.isVersionCompatible
-love.test.love.isVersionCompatible = function(test)
+love.test.love.is_version_compatible = function(test)
   local major, minor, revision, _ = love.getVersion()
-  test:assertTrue(love.isVersionCompatible(major, minor, revision), 'check own version')
+  test:assert_true(love.isVersionCompatible(major, minor, revision), 'check own version')
 end
 
 
 -- love.setDeprecationOutput
-love.test.love.setDeprecationOutput = function(test)
+love.test.love.set_deprecation_output = function(test)
   local enabled = love.hasDeprecationOutput()
-  test:assertEquals(true, enabled, 'check enabled by default')
+  test:assert_equals(true, enabled, 'check enabled by default')
   love.setDeprecationOutput(false)
-  test:assertEquals(false, love.hasDeprecationOutput(), 'check disable')
+  test:assert_equals(false, love.hasDeprecationOutput(), 'check disable')
   love.setDeprecationOutput(true)
 end
 
 
 -- love.errhand
 love.test.love.errhand = function(test)
-  test:assertTrue(type(love.errhand) == 'function', 'check defined')
+  test:assert_true(type(love.errhand) == 'function', 'check defined')
 end
 
 
 -- love.run
 love.test.love.run = function(test)
-  test:assertTrue(type(love.run) == 'function', 'check defined')
+  test:assert_true(type(love.run) == 'function', 'check defined')
 end

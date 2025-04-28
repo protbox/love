@@ -52,7 +52,7 @@ int w_PolygonShape_validate(lua_State *L)
 
 static const luaL_Reg w_PolygonShape_functions[] =
 {
-	{ "getPoints", w_PolygonShape_getPoints },
+	{ "get_points", w_PolygonShape_getPoints },
 	{ "validate", w_PolygonShape_validate },
 	{ 0, 0 }
 };

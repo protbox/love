@@ -440,22 +440,22 @@ int w_File_getExtension(lua_State *L)
 
 const luaL_Reg w_File_functions[] =
 {
-	{ "getSize", w_File_getSize },
+	{ "get_size", w_File_getSize },
 	{ "open", w_File_open },
 	{ "close", w_File_close },
-	{ "isOpen", w_File_isOpen },
+	{ "is_open", w_File_isOpen },
 	{ "read", w_File_read },
 	{ "write", w_File_write },
 	{ "flush", w_File_flush },
-	{ "isEOF", w_File_isEOF },
+	{ "is_eof", w_File_isEOF },
 	{ "tell", w_File_tell },
 	{ "seek", w_File_seek },
 	{ "lines", w_File_lines },
-	{ "setBuffer", w_File_setBuffer },
-	{ "getBuffer", w_File_getBuffer },
-	{ "getMode", w_File_getMode },
-	{ "getFilename", w_File_getFilename },
-	{ "getExtension", w_File_getExtension },
+	{ "set_buffer", w_File_setBuffer },
+	{ "get_buffer", w_File_getBuffer },
+	{ "get_mode", w_File_getMode },
+	{ "get_filename", w_File_getFilename },
+	{ "get_extension", w_File_getExtension },
 	{ 0, 0 }
 };
 

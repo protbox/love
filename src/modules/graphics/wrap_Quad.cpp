@@ -91,11 +91,11 @@ int w_Quad_getLayer(lua_State *L)
 
 static const luaL_Reg w_Quad_functions[] =
 {
-	{ "setViewport", w_Quad_setViewport },
-	{ "getViewport", w_Quad_getViewport },
-	{ "getTextureDimensions", w_Quad_getTextureDimensions },
-	{ "setLayer", w_Quad_setLayer },
-	{ "getLayer", w_Quad_getLayer },
+	{ "set_viewport", w_Quad_setViewport },
+	{ "get_viewport", w_Quad_getViewport },
+	{ "get_texture_dimensions", w_Quad_getTextureDimensions },
+	{ "set_layer", w_Quad_setLayer },
+	{ "get_layer", w_Quad_getLayer },
 	{ 0, 0 }
 };
 

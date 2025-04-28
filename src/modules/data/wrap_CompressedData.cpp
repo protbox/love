@@ -56,7 +56,7 @@ int w_CompressedData_getFormat(lua_State *L)
 static const luaL_Reg w_CompressedData_functions[] =
 {
 	{ "clone", w_CompressedData_clone },
-	{ "getFormat", w_CompressedData_getFormat },
+	{ "get_format", w_CompressedData_getFormat },
 	{ 0, 0 },
 };
 

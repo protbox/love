@@ -167,16 +167,16 @@ int w_Joint_isDestroyed(lua_State *L)
 
 const luaL_Reg w_Joint_functions[] =
 {
-	{ "getType", w_Joint_getType },
-	{ "getBodies", w_Joint_getBodies },
-	{ "getAnchors", w_Joint_getAnchors },
-	{ "getReactionForce", w_Joint_getReactionForce },
-	{ "getReactionTorque", w_Joint_getReactionTorque },
-	{ "getCollideConnected", w_Joint_getCollideConnected },
-	{ "setUserData", w_Joint_setUserData },
-	{ "getUserData", w_Joint_getUserData },
+	{ "get_type", w_Joint_getType },
+	{ "get_bodies", w_Joint_getBodies },
+	{ "get_anchors", w_Joint_getAnchors },
+	{ "get_reaction_force", w_Joint_getReactionForce },
+	{ "get_reaction_torque", w_Joint_getReactionTorque },
+	{ "get_collide_connected", w_Joint_getCollideConnected },
+	{ "set_user_data", w_Joint_setUserData },
+	{ "get_user_data", w_Joint_getUserData },
 	{ "destroy", w_Joint_destroy },
-	{ "isDestroyed", w_Joint_isDestroyed },
+	{ "is_destroyed", w_Joint_isDestroyed },
 	{ 0, 0 }
 };
 

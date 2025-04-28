@@ -68,10 +68,10 @@ int w_FrictionJoint_getMaxTorque(lua_State *L)
 
 static const luaL_Reg w_FrictionJoint_functions[] =
 {
-	{ "setMaxForce", w_FrictionJoint_setMaxForce },
-	{ "getMaxForce", w_FrictionJoint_getMaxForce },
-	{ "setMaxTorque", w_FrictionJoint_setMaxTorque },
-	{ "getMaxTorque", w_FrictionJoint_getMaxTorque },
+	{ "set_max_force", w_FrictionJoint_setMaxForce },
+	{ "get_max_force", w_FrictionJoint_getMaxForce },
+	{ "set_max_torque", w_FrictionJoint_setMaxTorque },
+	{ "get_max_torque", w_FrictionJoint_getMaxTorque },
 	{ 0, 0 }
 };
 

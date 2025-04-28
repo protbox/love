@@ -120,13 +120,13 @@ int w_CompressedImageData_isLinear(lua_State *L)
 static const luaL_Reg w_CompressedImageData_functions[] =
 {
 	{ "clone", w_CompressedImageData_clone },
-	{ "getWidth", w_CompressedImageData_getWidth },
-	{ "getHeight", w_CompressedImageData_getHeight },
-	{ "getDimensions", w_CompressedImageData_getDimensions },
-	{ "getMipmapCount", w_CompressedImageData_getMipmapCount },
-	{ "getFormat", w_CompressedImageData_getFormat },
-	{ "setLinear", w_CompressedImageData_setLinear },
-	{ "isLinear", w_CompressedImageData_isLinear },
+	{ "get_width", w_CompressedImageData_getWidth },
+	{ "get_height", w_CompressedImageData_getHeight },
+	{ "get_dimensions", w_CompressedImageData_getDimensions },
+	{ "get_mipmap_count", w_CompressedImageData_getMipmapCount },
+	{ "get_format", w_CompressedImageData_getFormat },
+	{ "set_linear", w_CompressedImageData_setLinear },
+	{ "is_linear", w_CompressedImageData_isLinear },
 	{ 0, 0 },
 };
 

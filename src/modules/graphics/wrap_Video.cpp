@@ -150,17 +150,17 @@ int w_Video_getFilter(lua_State *L)
 
 static const luaL_Reg functions[] =
 {
-	{ "getStream", w_Video_getStream },
-	{ "getSource", w_Video_getSource },
-	{ "_setSource", w_Video_setSource },
-	{ "getWidth", w_Video_getWidth },
-	{ "getHeight", w_Video_getHeight },
-	{ "getDimensions", w_Video_getDimensions },
-	{ "getPixelWidth", w_Video_getPixelWidth },
-	{ "getPixelHeight", w_Video_getPixelHeight },
-	{ "getPixelDimensions", w_Video_getPixelDimensions },
-	{ "setFilter", w_Video_setFilter },
-	{ "getFilter", w_Video_getFilter },
+	{ "get_stream", w_Video_getStream },
+	{ "get_source", w_Video_getSource },
+	{ "_set_source", w_Video_setSource },
+	{ "get_width", w_Video_getWidth },
+	{ "get_height", w_Video_getHeight },
+	{ "get_dimensions", w_Video_getDimensions },
+	{ "get_pixel_width", w_Video_getPixelWidth },
+	{ "get_pixel_height", w_Video_getPixelHeight },
+	{ "get_pixel_dimensions", w_Video_getPixelDimensions },
+	{ "set_filter", w_Video_setFilter },
+	{ "get_filter", w_Video_getFilter },
 	{ 0, 0 }
 };
 

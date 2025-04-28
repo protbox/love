@@ -238,11 +238,11 @@ int w_newGlyphData(lua_State *L)
 // List of functions to wrap.
 static const luaL_Reg functions[] =
 {
-	{ "newRasterizer",  w_newRasterizer },
-	{ "newTrueTypeRasterizer", w_newTrueTypeRasterizer },
-	{ "newBMFontRasterizer", w_newBMFontRasterizer },
-	{ "newImageRasterizer", w_newImageRasterizer },
-	{ "newGlyphData",  w_newGlyphData },
+	{ "new_rasterizer", w_newRasterizer },
+	{ "new_true_type_rasterizer", w_newTrueTypeRasterizer },
+	{ "new_bm_font_rasterizer", w_newBMFontRasterizer },
+	{ "new_image_rasterizer", w_newImageRasterizer },
+	{ "new_glyph_data", w_newGlyphData },
 	{ 0, 0 }
 };
 

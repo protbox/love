@@ -31,14 +31,14 @@ function graphics.newVideo(file, settings)
 	settings = settings == nil and {} or settings
 	if type(settings) ~= "table" then error("bad argument #2 to newVideo (expected table)", 2) end
 
-	local video = love.graphics._newVideo(file, settings.dpiscale)
+	local video = love.graphics._new_video(file, settings.dpiscale)
 	local source, success
 
 	if settings.audio ~= false and love.audio then
-		success, source = pcall(love.audio.newSource, video:getStream():getFilename(), "stream", "file")
+		success, source = pcall(love.audio.new_source, video:get_stream():getFilename(), "stream", "file")
 	end
 	if success then
-		video:setSource(source)
+		video:set_source(source)
 	elseif settings.audio == true then
 		if love.audio then
 			error("Video had no audio track", 2)
@@ -46,14 +46,14 @@ function graphics.newVideo(file, settings)
 			error("love.audio was not loaded", 2)
 		end
 	else
-		video:getStream():setSync()
+		video:get_stream():setSync()
 	end
 
 	return video
 end
 
 function graphics.stencil(func, action, value, keepvalues)
-	love.markDeprecated(2, "love.graphics.stencil", "function", "replaced", "love.graphics.setStencilMode or setStencilState")
+	love.markDeprecated(2, "love.graphics.stencil", "function", "replaced", "love.graphics.set_stencil_mode or setStencilState")
 
 	if not keepvalues then
 		graphics.clear(false, true, false)
@@ -78,7 +78,7 @@ function graphics.stencil(func, action, value, keepvalues)
 end
 
 function graphics.setStencilTest(mode, value)
-	love.markDeprecated(2, "love.graphics.setStencilTest", "function", "replaced", "love.graphics.setStencilMode or setStencilState")
+	love.markDeprecated(2, "love.graphics.set_stencil_test", "function", "replaced", "love.graphics.set_stencil_mode or setStencilState")
 
 	if mode ~= nil then
 		graphics.setStencilState("keep", mode, value)
@@ -88,7 +88,7 @@ function graphics.setStencilTest(mode, value)
 end
 
 function graphics.getStencilTest()
-	love.markDeprecated(2, "love.graphics.getStencilTest", "function", "replaced", "love.graphics.getStencilMode or getStencilState")
+	love.markDeprecated(2, "love.graphics.get_stencil_test", "function", "replaced", "love.graphics.get_stencil_mode or getStencilState")
 
 	local action, mode, value = graphics.getStencilState()
 	return mode, value

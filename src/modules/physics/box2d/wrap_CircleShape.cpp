@@ -68,10 +68,10 @@ int w_CircleShape_setPoint(lua_State *L)
 
 static const luaL_Reg w_CircleShape_functions[] =
 {
-	{ "getRadius", w_CircleShape_getRadius },
-	{ "setRadius", w_CircleShape_setRadius },
-	{ "getPoint", w_CircleShape_getPoint },
-	{ "setPoint", w_CircleShape_setPoint },
+	{ "get_radius", w_CircleShape_getRadius },
+	{ "set_radius", w_CircleShape_setRadius },
+	{ "get_point", w_CircleShape_getPoint },
+	{ "set_point", w_CircleShape_setPoint },
 	{ 0, 0 }
 };
 

@@ -32,33 +32,33 @@ local function clamp01(x)
 	return min(max(x, 0), 1)
 end
 
-local rng = love_math._getRandomGenerator()
+local rng = love_math._get_random_generator()
 
 function love_math.random(l, u)
 	return rng:random(l, u)
 end
 
-function love_math.randomNormal(stddev, mean)
-	return rng:randomNormal(stddev, mean)
+function love_math.random_normal(stddev, mean)
+	return rng:random_normal(stddev, mean)
 end
 
-function love_math.setRandomSeed(low, high)
-	return rng:setSeed(low, high)
+function love_math.set_random_seed(low, high)
+	return rng:set_seed(low, high)
 end
 
-function love_math.getRandomSeed()
-	return rng:getSeed()
+function love_math.get_random_seed()
+	return rng:get_seed()
 end
 
-function love_math.setRandomState(state)
-	return rng:setState(state)
+function love_math.set_random_state(state)
+	return rng:set_state(state)
 end
 
-function love_math.getRandomState()
-	return rng:getState()
+function love_math.get_random_state()
+	return rng:get_state()
 end
 
-function love_math.colorToBytes(r, g, b, a)
+function love_math.color_to_bytes(r, g, b, a)
 	if type(r) == "table" then
 		r, g, b, a = r[1], r[2], r[3], r[4]
 	end
@@ -69,7 +69,7 @@ function love_math.colorToBytes(r, g, b, a)
 	return r, g, b, a
 end
 
-function love_math.colorFromBytes(r, g, b, a)
+function love_math.color_from_bytes(r, g, b, a)
 	if type(r) == "table" then
 		r, g, b, a = r[1], r[2], r[3], r[4]
 	end
@@ -113,7 +113,7 @@ local love = require("love")
 -- Overwrite some regular love.math functions with FFI implementations.
 
 function love_math.noise(x, y, z, w)
-	love.markDeprecated(2, "love.math.noise", "function", "replaced", "love.math.perlinNoise or love.math.simplexNoise")
+	love.markDeprecated(2, "love.math.noise", "function", "replaced", "love.math.perlin_noise or love.math.simplex_noise")
 
 	if w ~= nil then
 		return tonumber(ffifuncs.pnoise4(x, y, z, w))
@@ -126,7 +126,7 @@ function love_math.noise(x, y, z, w)
 	end
 end
 
-function love_math.perlinNoise(x, y, z, w)
+function love_math.perlin_noise(x, y, z, w)
 	if w ~= nil then
 		return tonumber(ffifuncs.pnoise4(x, y, z, w))
 	elseif z ~= nil then
@@ -138,7 +138,7 @@ function love_math.perlinNoise(x, y, z, w)
 	end
 end
 
-function love_math.simplexNoise(x, y, z, w)
+function love_math.simplex_noise(x, y, z, w)
 	if w ~= nil then
 		return tonumber(ffifuncs.snoise4(x, y, z, w))
 	elseif z ~= nil then
@@ -157,7 +157,7 @@ local function gammaToLinear(c)
 	return c
 end
 
-function love_math.gammaToLinear(r, g, b, a)
+function love_math.gamma_to_linear(r, g, b, a)
 	if type(r) == "table" then
 		local t = r
 		return gammaToLinear(t[1]), gammaToLinear(t[2]), gammaToLinear(t[3]), t[4]
@@ -172,7 +172,7 @@ local function linearToGamma(c)
 	return c
 end
 
-function love_math.linearToGamma(r, g, b, a)
+function love_math.linear_to_gamma(r, g, b, a)
 	if type(r) == "table" then
 		local t = r
 		return linearToGamma(t[1]), linearToGamma(t[2]), linearToGamma(t[3]), t[4]

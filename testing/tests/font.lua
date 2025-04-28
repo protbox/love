@@ -8,19 +8,19 @@
 --------------------------------------------------------------------------------
 
 
--- GlyphData (love.font.newGlyphData)
+-- GlyphData (love.font.new_glyph_data)
 love.test.font.GlyphData = function(test)
 
   -- create obj
-  local rasterizer = love.font.newRasterizer('resources/font.ttf')
-  local gdata = love.font.newGlyphData(rasterizer, 97) -- 'a'
-  test:assertObject(gdata)
+  local rasterizer = love.font.new_rasterizer('resources/font.ttf')
+  local gdata = love.font.new_glyph_data(rasterizer, 97) -- 'a'
+  test:assert_object(gdata)
 
   -- check properties match expected
-  test:assertNotNil(gdata:getString())
-  test:assertEquals(128, gdata:getSize(), 'check data size')
-  test:assertEquals(9, gdata:getAdvance(), 'check advance')
-  test:assertEquals('la8', gdata:getFormat(), 'check format')
+  test:assert_not_nil(gdata:get_string())
+  test:assert_equals(128, gdata:get_size(), 'check data size')
+  test:assert_equals(9, gdata:get_advance(), 'check advance')
+  test:assert_equals('la8', gdata:get_format(), 'check format')
 
   -- @TODO 
   --[[
@@ -30,55 +30,55 @@ love.test.font.GlyphData = function(test)
     advanced text shaping that happens in love 12 having a unicode codepoint 
     associated with a glyph probably doesn't make sense in the first place"
   ]]--
-  --test:assertEquals(97, gdata:getGlyph(), 'check glyph number') - returns 0
-  --test:assertEquals('a', gdata:getGlyphString(), 'check glyph string') - returns ''
+  --test:assert_equals(97, gdata:get_glyph(), 'check glyph number') - returns 0
+  --test:assert_equals('a', gdata:get_glyph_string(), 'check glyph string') - returns ''
 
   -- check height + width
-  test:assertEquals(8, gdata:getHeight(), 'check height')
-  test:assertEquals(8, gdata:getWidth(), 'check width')
+  test:assert_equals(8, gdata:get_height(), 'check height')
+  test:assert_equals(8, gdata:get_width(), 'check width')
 
   -- check boundary / dimensions
-  local x, y, w, h = gdata:getBoundingBox()
-  local dw, dh = gdata:getDimensions()
-  test:assertEquals(0, x, 'check bbox x')
-  test:assertEquals(-3, y, 'check bbox y')
-  test:assertEquals(8, w, 'check bbox w')
-  test:assertEquals(14, h, 'check bbox h')
-  test:assertEquals(8, dw, 'check dim width')
-  test:assertEquals(8, dh, 'check dim height')
+  local x, y, w, h = gdata:get_bounding_box()
+  local dw, dh = gdata:get_dimensions()
+  test:assert_equals(0, x, 'check bbox x')
+  test:assert_equals(-3, y, 'check bbox y')
+  test:assert_equals(8, w, 'check bbox w')
+  test:assert_equals(14, h, 'check bbox h')
+  test:assert_equals(8, dw, 'check dim width')
+  test:assert_equals(8, dh, 'check dim height')
 
   -- check bearing
-  local bw, bh = gdata:getBearing()
-  test:assertEquals(0, bw, 'check bearing w')
-  test:assertEquals(11, bh, 'check bearing h')
+  local bw, bh = gdata:get_bearing()
+  test:assert_equals(0, bw, 'check bearing w')
+  test:assert_equals(11, bh, 'check bearing h')
 
 end
 
 
--- Rasterizer (love.font.newRasterizer)
+-- Rasterizer (love.font.new_rasterizer)
 love.test.font.Rasterizer = function(test)
 
   -- create obj
-  local rasterizer = love.font.newRasterizer('resources/font.ttf')
-  test:assertObject(rasterizer)
+  local rasterizer = love.font.new_rasterizer('resources/font.ttf')
+  test:assert_object(rasterizer)
 
   -- check advance
-  test:assertEquals(9, rasterizer:getAdvance(), 'check advance')
+  test:assert_equals(9, rasterizer:get_advance(), 'check advance')
 
   -- check ascent/descent
-  test:assertEquals(9, rasterizer:getAscent(), 'check ascent')
-  test:assertEquals(-3, rasterizer:getDescent(), 'check descent')
+  test:assert_equals(9, rasterizer:get_ascent(), 'check ascent')
+  test:assert_equals(-3, rasterizer:get_descent(), 'check descent')
 
   -- check glyphcount
-  test:assertEquals(77, rasterizer:getGlyphCount(), 'check glyph count')
+  test:assert_equals(77, rasterizer:get_glyph_count(), 'check glyph count')
 
   -- check specific glyphs
-  test:assertObject(rasterizer:getGlyphData('L'))
-  test:assertTrue(rasterizer:hasGlyphs('L', 'O', 'V', 'E'), 'check LOVE')
+  test:assert_object(rasterizer:get_glyph_data('L'))
+  test:assert_true(rasterizer:has_glyphs('L', 'O', 'V', 'E'), 'check LOVE')
 
   -- check height + lineheight
-  test:assertEquals(12, rasterizer:getHeight(), 'check height')
-  test:assertEquals(15, rasterizer:getLineHeight(), 'check line height')
+  test:assert_equals(12, rasterizer:get_height(), 'check height')
+  test:assert_equals(15, rasterizer:get_line_height(), 'check line height')
 
 end
 
@@ -90,42 +90,42 @@ end
 --------------------------------------------------------------------------------
 
 
--- love.font.newBMFontRasterizer
-love.test.font.newBMFontRasterizer = function(test)
-  local rasterizer = love.font.newBMFontRasterizer('resources/love.png');
-  test:assertObject(rasterizer)
+-- love.font.new_bm_font_rasterizer
+love.test.font.new_bm_font_rasterizer = function(test)
+  local rasterizer = love.font.new_bm_font_rasterizer('resources/love.png');
+  test:assert_object(rasterizer)
 end
 
 
--- love.font.newGlyphData
+-- love.font.new_glyph_data
 -- @NOTE this is just basic nil checking, objs have their own test method
-love.test.font.newGlyphData = function(test)
-  local img = love.image.newImageData('resources/love.png')
-  local rasterizer = love.font.newImageRasterizer(img, 'ABC', 0, 1);
-  local glyphdata = love.font.newGlyphData(rasterizer, 65)
-  test:assertObject(glyphdata)
+love.test.font.new_glyph_data = function(test)
+  local img = love.image.new_image_data('resources/love.png')
+  local rasterizer = love.font.new_image_rasterizer(img, 'ABC', 0, 1);
+  local glyphdata = love.font.new_glyph_data(rasterizer, 65)
+  test:assert_object(glyphdata)
 end
 
 
--- love.font.newImageRasterizer
+-- love.font.new_image_rasterizer
 -- @NOTE this is just basic nil checking, objs have their own test method
-love.test.font.newImageRasterizer = function(test)
-  local img = love.image.newImageData('resources/love.png')
-  local rasterizer = love.font.newImageRasterizer(img, 'ABC', 0, 1);
-  test:assertObject(rasterizer)
+love.test.font.new_image_rasterizer = function(test)
+  local img = love.image.new_image_data('resources/love.png')
+  local rasterizer = love.font.new_image_rasterizer(img, 'ABC', 0, 1);
+  test:assert_object(rasterizer)
 end
 
 
--- love.font.newRasterizer
+-- love.font.new_rasterizer
 -- @NOTE this is just basic nil checking, objs have their own test method
-love.test.font.newRasterizer = function(test)
-  test:assertObject(love.font.newRasterizer('resources/font.ttf'))
+love.test.font.new_rasterizer = function(test)
+  test:assert_object(love.font.new_rasterizer('resources/font.ttf'))
 end
 
 
--- love.font.newTrueTypeRasterizer
+-- love.font.new_true_type_rasterizer
 -- @NOTE this is just basic nil checking, objs have their own test method
-love.test.font.newTrueTypeRasterizer = function(test)
-  test:assertObject(love.font.newTrueTypeRasterizer(12, "normal", 1))
-  test:assertObject(love.font.newTrueTypeRasterizer('resources/font.ttf', 8, "normal", 1))
+love.test.font.new_true_type_rasterizer = function(test)
+  test:assert_object(love.font.new_true_type_rasterizer(12, "normal", 1))
+  test:assert_object(love.font.new_true_type_rasterizer('resources/font.ttf', 8, "normal", 1))
 end

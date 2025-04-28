@@ -166,25 +166,25 @@ int w_Contact_isDestroyed(lua_State *L)
 
 static const luaL_Reg w_Contact_functions[] =
 {
-	{ "getPositions", w_Contact_getPositions },
-	{ "getNormal", w_Contact_getNormal },
-	{ "getFriction", w_Contact_getFriction },
-	{ "getRestitution", w_Contact_getRestitution },
-	{ "isEnabled", w_Contact_isEnabled },
-	{ "isTouching", w_Contact_isTouching },
-	{ "setFriction", w_Contact_setFriction },
-	{ "setRestitution", w_Contact_setRestitution },
-	{ "setEnabled", w_Contact_setEnabled },
-	{ "resetFriction", w_Contact_resetFriction },
-	{ "resetRestitution", w_Contact_resetRestitution },
-	{ "setTangentSpeed", w_Contact_setTangentSpeed },
-	{ "getTangentSpeed", w_Contact_getTangentSpeed },
-	{ "getChildren", w_Contact_getChildren },
-	{ "getShapes", w_Contact_getShapes },
-	{ "isDestroyed", w_Contact_isDestroyed },
+	{ "get_positions", w_Contact_getPositions },
+	{ "get_normal", w_Contact_getNormal },
+	{ "get_friction", w_Contact_getFriction },
+	{ "get_restitution", w_Contact_getRestitution },
+	{ "is_enabled", w_Contact_isEnabled },
+	{ "is_touching", w_Contact_isTouching },
+	{ "set_friction", w_Contact_setFriction },
+	{ "set_restitution", w_Contact_setRestitution },
+	{ "set_enabled", w_Contact_setEnabled },
+	{ "reset_friction", w_Contact_resetFriction },
+	{ "reset_restitution", w_Contact_resetRestitution },
+	{ "set_tangent_speed", w_Contact_setTangentSpeed },
+	{ "get_tangent_speed", w_Contact_getTangentSpeed },
+	{ "get_children", w_Contact_getChildren },
+	{ "get_shapes", w_Contact_getShapes },
+	{ "is_destroyed", w_Contact_isDestroyed },
 
 	// Deprecated
-	{ "getFixtures", w_Contact_getFixtures },
+	{ "get_fixtures", w_Contact_getFixtures },
 
 	{ 0, 0 }
 };

@@ -81,8 +81,8 @@ static const luaL_Reg w_Thread_functions[] =
 {
 	{ "start", w_Thread_start },
 	{ "wait", w_Thread_wait },
-	{ "getError", w_Thread_getError },
-	{ "isRunning", w_Thread_isRunning },
+	{ "get_error", w_Thread_getError },
+	{ "is_running", w_Thread_isRunning },
 	{ 0, 0 }
 };
 

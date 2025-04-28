@@ -55,12 +55,12 @@ local objectcache = setmetatable({}, {
 	__mode = "k",
 	__index = function(self, sounddata)
 		local bytedepth = _getBitDepth(sounddata) / 8
-		local pointer = ffi.cast(datatypes[bytedepth], sounddata:getFFIPointer())
+		local pointer = ffi.cast(datatypes[bytedepth], sounddata:get_ffi_pointer())
 
 		local p = {
 			bytedepth = bytedepth,
 			pointer = pointer,
-			size = sounddata:getSize(),
+			size = sounddata:get_size(),
 			maxvalue = typemaxvals[bytedepth],
 			samplecount = _getSampleCount(sounddata),
 			samplerate = _getSampleRate(sounddata),
@@ -76,9 +76,9 @@ local objectcache = setmetatable({}, {
 
 -- Overwrite existing functions with new FFI versions.
 
-function SoundData:getSample(i, channel)
-	if type(i) ~= "number" then error("bad argument #1 to SoundData:getSample (expected number)", 2) end
-	if channel ~= nil and type(channel) ~= "number" then error("bad argument #2 to SoundData:getSample (expected number)", 2) end
+function SoundData:get_sample(i, channel)
+	if type(i) ~= "number" then error("bad argument #1 to SoundData:get_sample (expected number)", 2) end
+	if channel ~= nil and type(channel) ~= "number" then error("bad argument #2 to SoundData:get_sample (expected number)", 2) end
 
 	i = floor(i)
 
@@ -104,14 +104,14 @@ function SoundData:getSample(i, channel)
 	end
 end
 
-function SoundData:setSample(i, channel, sample)
-	if type(i) ~= "number" then error("bad argument #1 to SoundData:setSample (expected number)", 2) end
+function SoundData:set_sample(i, channel, sample)
+	if type(i) ~= "number" then error("bad argument #1 to SoundData:set_sample (expected number)", 2) end
 	if sample ~= nil then
-		if type(channel) ~= "number" then error("bad argument #2 to SoundData:setSample (expected number)", 2) end
+		if type(channel) ~= "number" then error("bad argument #2 to SoundData:set_sample (expected number)", 2) end
 	else
 		sample, channel = channel, nil
 	end
-	if type(sample) ~= "number" then error("bad argument #2 to SoundData:setSample (expected number)", 2) end
+	if type(sample) ~= "number" then error("bad argument #2 to SoundData:set_sample (expected number)", 2) end
 
 	i = floor(i)
 
@@ -139,23 +139,23 @@ function SoundData:setSample(i, channel, sample)
 	end
 end
 
-function SoundData:getBitDepth()
+function SoundData:get_bit_depth()
 	return objectcache[self].bytedepth * 8
 end
 
-function SoundData:getSampleCount()
+function SoundData:get_sample_count()
 	return objectcache[self].samplecount
 end
 
-function SoundData:getSampleRate()
+function SoundData:get_sample_rate()
 	return objectcache[self].samplerate
 end
 
-function SoundData:getChannelCount()
+function SoundData:get_channel_count()
 	return objectcache[self].channels
 end
 
-function SoundData:getDuration()
+function SoundData:get_duration()
 	return objectcache[self].duration
 end
 

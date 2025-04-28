@@ -98,14 +98,14 @@ int w_MouseJoint_getDamping(lua_State *L)
 
 static const luaL_Reg w_MouseJoint_functions[] =
 {
-	{ "setTarget", w_MouseJoint_setTarget },
-	{ "getTarget", w_MouseJoint_getTarget },
-	{ "setMaxForce", w_MouseJoint_setMaxForce },
-	{ "getMaxForce", w_MouseJoint_getMaxForce },
-	{ "setStiffness", w_MouseJoint_setStiffness },
-	{ "getStiffness", w_MouseJoint_getStiffness },
-	{ "setDamping", w_MouseJoint_setDamping },
-	{ "getDamping", w_MouseJoint_getDamping },
+	{ "set_target", w_MouseJoint_setTarget },
+	{ "get_target", w_MouseJoint_getTarget },
+	{ "set_max_force", w_MouseJoint_setMaxForce },
+	{ "get_max_force", w_MouseJoint_getMaxForce },
+	{ "set_stiffness", w_MouseJoint_setStiffness },
+	{ "get_stiffness", w_MouseJoint_getStiffness },
+	{ "set_damping", w_MouseJoint_setDamping },
+	{ "get_damping", w_MouseJoint_getDamping },
 	{ 0, 0 }
 };
 

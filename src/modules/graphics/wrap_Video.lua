@@ -25,33 +25,33 @@ misrepresented as being the original software.
 local Video_mt = ...
 local Video = Video_mt.__index
 
-function Video:setSource(source)
+function Video:set_source(source)
 	self:_setSource(source)
-	self:getStream():setSync(source)
+	self:get_stream():setSync(source)
 end
 
 function Video:play()
-	return self:getStream():play()
+	return self:get_stream():play()
 end
 
 function Video:pause()
-	return self:getStream():pause()
+	return self:get_stream():pause()
 end
 
 function Video:seek(offset)
-	return self:getStream():seek(offset)
+	return self:get_stream():seek(offset)
 end
 
 function Video:rewind()
-	return self:getStream():rewind()
+	return self:get_stream():rewind()
 end
 
 function Video:tell()
-	return self:getStream():tell()
+	return self:get_stream():tell()
 end
 
-function Video:isPlaying()
-	return self:getStream():isPlaying()
+function Video:is_playing()
+	return self:get_stream():isPlaying()
 end
 
 -- DO NOT REMOVE THE NEXT LINE. It is used to load this file as a C++ string.

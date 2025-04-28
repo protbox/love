@@ -45,7 +45,7 @@ local ffifuncs = ffi.cast("const FFI_Data **", ffifuncspointer_str)[0]
 
 -- Overwrite placeholder method with the FFI implementation.
 
-function Data:getFFIPointer()
+function Data:get_ffi_pointer()
 	-- TODO: This should ideally be handled inside the C function
 	if self == nil then error("bad argument #1 to 'getFFIPointer' (Data expected, got no value)", 2) end
 	return ffifuncs.getFFIPointer(self)

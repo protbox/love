@@ -74,11 +74,11 @@ int w_WeldJoint_getReferenceAngle(lua_State *L)
 
 static const luaL_Reg w_WeldJoint_functions[] =
 {
-	{ "setStiffness", w_WeldJoint_setStiffness },
-	{ "getStiffness", w_WeldJoint_getStiffness },
-	{ "setDamping", w_WeldJoint_setDamping },
-	{ "getDamping", w_WeldJoint_getDamping },
-	{ "getReferenceAngle", w_WeldJoint_getReferenceAngle },
+	{ "set_stiffness", w_WeldJoint_setStiffness },
+	{ "get_stiffness", w_WeldJoint_getStiffness },
+	{ "set_damping", w_WeldJoint_setDamping },
+	{ "get_damping", w_WeldJoint_getDamping },
+	{ "get_reference_angle", w_WeldJoint_getReferenceAngle },
 	{ 0, 0 }
 };
 

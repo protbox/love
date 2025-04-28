@@ -8,89 +8,89 @@
 --------------------------------------------------------------------------------
 
 
--- Decoder (love.sound.newDecoder)
+-- Decoder (love.sound.new_decoder)
 love.test.sound.Decoder = function(test)
 
   -- create obj
-  local decoder = love.sound.newDecoder('resources/click.ogg')
-  test:assertObject(decoder)
+  local decoder = love.sound.new_decoder('resources/click.ogg')
+  test:assert_object(decoder)
 
   -- check bit depth
-  test:assertMatch({8, 16}, decoder:getBitDepth(), 'check bit depth')
+  test:assert_match({8, 16}, decoder:get_bit_depth(), 'check bit depth')
 
   -- check channel count
-  test:assertMatch({1, 2}, decoder:getChannelCount(), 'check channel count')
+  test:assert_match({1, 2}, decoder:get_channel_count(), 'check channel count')
 
   -- check duration
-  test:assertRange(decoder:getDuration(), 0.06, 0.07, 'check duration')
+  test:assert_range(decoder:get_duration(), 0.06, 0.07, 'check duration')
 
   -- check sample rate
-  test:assertEquals(44100, decoder:getSampleRate(), 'check sample rate')
+  test:assert_equals(44100, decoder:get_sample_rate(), 'check sample rate')
 
   -- check makes sound data (test in method below)
-  test:assertObject(decoder:decode())
+  test:assert_object(decoder:decode())
 
   -- check cloning sound
   local clone = decoder:clone()
-  test:assertMatch({8, 16}, clone:getBitDepth(), 'check cloned bit depth')
-  test:assertMatch({1, 2}, clone:getChannelCount(), 'check cloned channel count')
-  test:assertRange(clone:getDuration(), 0.06, 0.07, 'check cloned duration')
-  test:assertEquals(44100, clone:getSampleRate(), 'check cloned sample rate')
+  test:assert_match({8, 16}, clone:get_bit_depth(), 'check cloned bit depth')
+  test:assert_match({1, 2}, clone:get_channel_count(), 'check cloned channel count')
+  test:assert_range(clone:get_duration(), 0.06, 0.07, 'check cloned duration')
+  test:assert_equals(44100, clone:get_sample_rate(), 'check cloned sample rate')
 
 end
 
 
--- SoundData (love.sound.newSoundData)
+-- SoundData (love.sound.new_sound_data)
 love.test.sound.SoundData = function(test)
 
   -- create obj
-  local sdata = love.sound.newSoundData('resources/click.ogg')
-  test:assertObject(sdata)
+  local sdata = love.sound.new_sound_data('resources/click.ogg')
+  test:assert_object(sdata)
 
   -- check data size + string
-  test:assertEquals(11708, sdata:getSize(), 'check size')
-  test:assertNotNil(sdata:getString())
+  test:assert_equals(11708, sdata:get_size(), 'check size')
+  test:assert_not_nil(sdata:get_string())
 
   -- check bit depth
-  test:assertMatch({8, 16}, sdata:getBitDepth(), 'check bit depth')
+  test:assert_match({8, 16}, sdata:get_bit_depth(), 'check bit depth')
 
   -- check channel count
-  test:assertMatch({1, 2}, sdata:getChannelCount(), 'check channel count')
+  test:assert_match({1, 2}, sdata:get_channel_count(), 'check channel count')
 
   -- check duration
-  test:assertRange(sdata:getDuration(), 0.06, 0.07, 'check duration')
+  test:assert_range(sdata:get_duration(), 0.06, 0.07, 'check duration')
 
   -- check samples
-  test:assertEquals(44100, sdata:getSampleRate(), 'check sample rate')
-  test:assertEquals(2927, sdata:getSampleCount(), 'check sample count')
+  test:assert_equals(44100, sdata:get_sample_rate(), 'check sample rate')
+  test:assert_equals(2927, sdata:get_sample_count(), 'check sample count')
 
   -- check cloning
   local clone = sdata:clone()
-  test:assertEquals(11708, clone:getSize(), 'check clone size')
-  test:assertNotNil(clone:getString())
-  test:assertMatch({8, 16}, clone:getBitDepth(), 'check clone bit depth')
-  test:assertMatch({1, 2}, clone:getChannelCount(), 'check clone channel count')
-  test:assertRange(clone:getDuration(), 0.06, 0.07, 'check clone duration')
-  test:assertEquals(44100, clone:getSampleRate(), 'check clone sample rate')
-  test:assertEquals(2927, clone:getSampleCount(), 'check clone sample count')
+  test:assert_equals(11708, clone:get_size(), 'check clone size')
+  test:assert_not_nil(clone:get_string())
+  test:assert_match({8, 16}, clone:get_bit_depth(), 'check clone bit depth')
+  test:assert_match({1, 2}, clone:get_channel_count(), 'check clone channel count')
+  test:assert_range(clone:get_duration(), 0.06, 0.07, 'check clone duration')
+  test:assert_equals(44100, clone:get_sample_rate(), 'check clone sample rate')
+  test:assert_equals(2927, clone:get_sample_count(), 'check clone sample count')
 
   -- check sample setting
-  test:assertRange(sdata:getSample(0.001), -0.1, 0, 'check sample 1')
-  test:assertRange(sdata:getSample(0.005), -0.1, 0, 'check sample 1')
-  sdata:setSample(0.002, 1)
-  test:assertEquals(1, sdata:getSample(0.002), 'check setting sample manually')
+  test:assert_range(sdata:get_sample(0.001), -0.1, 0, 'check sample 1')
+  test:assert_range(sdata:get_sample(0.005), -0.1, 0, 'check sample 1')
+  sdata:set_sample(0.002, 1)
+  test:assert_equals(1, sdata:get_sample(0.002), 'check setting sample manually')
 
   -- check copying from another sound
-  local copy1 = love.sound.newSoundData('resources/tone.ogg')
-  local copy2 = love.sound.newSoundData('resources/pop.ogg')
-  local before = copy2:getSample(0.02)
-  copy2:copyFrom(copy1, 0.01, 1, 0.02)
-  test:assertNotEquals(before, copy2:getSample(0.02), 'check changed')
+  local copy1 = love.sound.new_sound_data('resources/tone.ogg')
+  local copy2 = love.sound.new_sound_data('resources/pop.ogg')
+  local before = copy2:get_sample(0.02)
+  copy2:copy_from(copy1, 0.01, 1, 0.02)
+  test:assert_not_equals(before, copy2:get_sample(0.02), 'check changed')
 
   -- check slicing
-  local count = math.floor(copy1:getSampleCount()/2)
+  local count = math.floor(copy1:get_sample_count()/2)
   local slice = copy1:slice(0, count)
-  test:assertEquals(count, slice:getSampleCount(), 'check slice length')
+  test:assert_equals(count, slice:get_sample_count(), 'check slice length')
 
 end
 
@@ -103,16 +103,16 @@ end
 
 
 
--- love.sound.newDecoder
+-- love.sound.new_decoder
 -- @NOTE this is just basic nil checking, objs have their own test method
-love.test.sound.newDecoder = function(test)
-  test:assertObject(love.sound.newDecoder('resources/click.ogg'))
+love.test.sound.new_decoder = function(test)
+  test:assert_object(love.sound.new_decoder('resources/click.ogg'))
 end
 
 
--- love.sound.newSoundData
+-- love.sound.new_sound_data
 -- @NOTE this is just basic nil checking, objs have their own test method
-love.test.sound.newSoundData = function(test)
-  test:assertObject(love.sound.newSoundData('resources/click.ogg'))
-  test:assertObject(love.sound.newSoundData(math.floor((1/32)*44100), 44100, 16, 1))
+love.test.sound.new_sound_data = function(test)
+  test:assert_object(love.sound.new_sound_data('resources/click.ogg'))
+  test:assert_object(love.sound.new_sound_data(math.floor((1/32)*44100), 44100, 16, 1))
 end

@@ -82,12 +82,12 @@ int w_DistanceJoint_getDamping(lua_State *L)
 
 static const luaL_Reg w_DistanceJoint_functions[] =
 {
-	{ "setLength", w_DistanceJoint_setLength },
-	{ "getLength", w_DistanceJoint_getLength },
-	{ "setStiffness", w_DistanceJoint_setStiffness },
-	{ "getStiffness", w_DistanceJoint_getStiffness },
-	{ "setDamping", w_DistanceJoint_setDamping },
-	{ "getDamping", w_DistanceJoint_getDamping },
+	{ "set_length", w_DistanceJoint_setLength },
+	{ "get_length", w_DistanceJoint_getLength },
+	{ "set_stiffness", w_DistanceJoint_setStiffness },
+	{ "get_stiffness", w_DistanceJoint_getStiffness },
+	{ "set_damping", w_DistanceJoint_setDamping },
+	{ "get_damping", w_DistanceJoint_getDamping },
 	{ 0, 0 }
 };
 

@@ -47,10 +47,10 @@ function love.boot()
 
 	love.rawGameArguments = arg
 
-	local arg0 = love.arg.getLow(love.rawGameArguments)
+	local arg0 = love.arg.get_low(love.rawGameArguments)
 	love.filesystem.init(arg0)
 
-	local exepath = love.filesystem.getExecutablePath()
+	local exepath = love.filesystem.get_executable_path()
 	if #exepath == 0 then
 		-- This shouldn't happen, but just in case we'll fall back to arg0.
 		exepath = arg0
@@ -60,7 +60,7 @@ function love.boot()
 	invalid_game_path = nil
 
 	-- Is this one of those fancy "fused" games?
-	local can_has_game = pcall(love.filesystem.setSource, exepath)
+	local can_has_game = pcall(love.filesystem.set_source, exepath)
 
 	-- It's a fused game, don't parse --game argument
 	if can_has_game then
@@ -68,18 +68,18 @@ function love.boot()
 	end
 
 	-- Parse options now that we know which options we're looking for.
-	love.arg.parseOptions(love.rawGameArguments)
+	love.arg.parse_options(love.rawGameArguments)
 
 	-- parseGameArguments can only be called after parseOptions.
-	love.parsedGameArguments = love.arg.parseGameArguments(love.rawGameArguments)
+	love.parsedGameArguments = love.arg.parse_game_arguments(love.rawGameArguments)
 
 	local o = love.arg.options
 
 	local is_fused_game = can_has_game or love.arg.options.fused.set
 
-	love.filesystem.setFused(is_fused_game)
+	love.filesystem.set_fused(is_fused_game)
 
-	love.setDeprecationOutput(not love.filesystem.isFused())
+	love.setDeprecationOutput(not love.filesystem.is_fused())
 
 	main_file = "main.lua"
 	local custom_main_file = false
@@ -96,17 +96,17 @@ function love.boot()
 				nouri = uridecode(nouri:sub(8))
 			end
 
-			full_source = love.path.getFull(nouri)
+			full_source = love.path.get_full(nouri)
 			local source_leaf = love.path.leaf(full_source)
 
 			if source_leaf:match("%.lua$") then
 				main_file = source_leaf
 				custom_main_file = true
-				full_source = love.path.getFull(full_source:sub(1, -(#source_leaf + 1)))
+				full_source = love.path.get_full(full_source:sub(1, -(#source_leaf + 1)))
 			end
 		end
 
-		can_has_game = pcall(love.filesystem.setSource, full_source)
+		can_has_game = pcall(love.filesystem.set_source, full_source)
 
 		if not can_has_game then
 			invalid_game_path = full_source
@@ -121,7 +121,7 @@ function love.boot()
 
 	-- Try to use the archive containing main.lua as the identity name. It
 	-- might not be available, in which case the fallbacks above are used.
-	local realdir = love.filesystem.getRealDirectory(main_file)
+	local realdir = love.filesystem.get_real_directory(main_file)
 	if realdir then
 		identity = love.path.leaf(realdir)
 	end
@@ -133,9 +133,9 @@ function love.boot()
 
 	-- When conf.lua is initially loaded, the main source should be checked
 	-- before the save directory (the identity should be appended.)
-	pcall(love.filesystem.setIdentity, identity, true)
+	pcall(love.filesystem.set_identity, identity, true)
 
-	if can_has_game and not (love.filesystem.getInfo(main_file) or (not custom_main_file and love.filesystem.getInfo("conf.lua"))) then
+	if can_has_game and not (love.filesystem.get_info(main_file) or (not custom_main_file and love.filesystem.get_info("conf.lua"))) then
 		no_game_code = true
 	end
 
@@ -232,7 +232,7 @@ function love.init()
 
 	-- If config file exists, load it and allow it to update config table.
 	local confok, conferr
-	if (not love.conf) and love.filesystem and love.filesystem.getInfo("conf.lua") then
+	if (not love.conf) and love.filesystem and love.filesystem.get_info("conf.lua") then
 		confok, conferr = pcall(require, "conf")
 	end
 
@@ -372,7 +372,7 @@ function love.init()
 			print(msg)
 
 			if love.window then
-				love.window.showMessageBox("Compatibility Warning", msg, "warning")
+				love.window.show_message_box("Compatibility Warning", msg, "warning")
 			end
 		end
 	end
@@ -385,11 +385,11 @@ function love.init()
 	if c.window and c.modules.window then
 		if c.window.icon then
 			assert(love.image, "If an icon is set in love.conf, love.image must be loaded.")
-			love.window.setIcon(love.image.newImageData(c.window.icon))
+			love.window.set_icon(love.image.new_image_data(c.window.icon))
 		end
 
-		love.window.setTitle(c.window.title or c.title)
-		assert(love.window.setMode(c.window.width, c.window.height,
+		love.window.set_title(c.window.title or c.title)
+		assert(love.window.set_mode(c.window.width, c.window.height,
 		{
 			fullscreen = c.window.fullscreen,
 			fullscreentype = c.window.fullscreentype,
@@ -424,9 +424,9 @@ function love.init()
 	end
 
 	if love.filesystem then
-		love.filesystem._setAndroidSaveExternal(c.externalstorage)
-		love.filesystem.setIdentity(c.identity or love.filesystem.getIdentity(), c.appendidentity)
-		if love.filesystem.getInfo(main_file) then
+		love.filesystem._set_android_save_external(c.externalstorage)
+		love.filesystem.set_identity(c.identity or love.filesystem.get_identity(), c.appendidentity)
+		if love.filesystem.get_info(main_file) then
 			require(main_file:gsub("%.lua$", ""))
 		end
 	end
@@ -496,7 +496,7 @@ return function()
 	while func do
 		if setModalDrawFunc and love.event and func ~= prevFunc then
 			prevFunc = func
-			love.event._setDefaultModalDrawCallback(func)
+			love.event._set_default_modal_draw_callback(func)
 		end
 		local _, retval, restartvalue = xpcall(func, deferErrhand)
 		if retval then return retval, restartvalue end

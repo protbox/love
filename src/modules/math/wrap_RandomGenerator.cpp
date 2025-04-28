@@ -140,11 +140,11 @@ static FFI_RandomGenerator ffifuncs =
 static const luaL_Reg w_RandomGenerator_functions[] =
 {
 	{ "_random", w_RandomGenerator__random }, // random() is defined in wrap_RandomGenerator.lua.
-	{ "randomNormal", w_RandomGenerator_randomNormal },
-	{ "setSeed", w_RandomGenerator_setSeed },
-	{ "getSeed", w_RandomGenerator_getSeed },
-	{ "setState", w_RandomGenerator_setState },
-	{ "getState", w_RandomGenerator_getState },
+	{ "random_normal", w_RandomGenerator_randomNormal },
+	{ "set_seed", w_RandomGenerator_setSeed },
+	{ "get_seed", w_RandomGenerator_getSeed },
+	{ "set_state", w_RandomGenerator_setState },
+	{ "get_state", w_RandomGenerator_getState },
 	{ 0, 0 }
 };
 

@@ -342,7 +342,7 @@ local objectcache = setmetatable({}, {
 			width = width,
 			height = height,
 			format = format,
-			pointer = conv ~= nil and ffi.cast(conv.pointer, imagedata:getFFIPointer()) or nil,
+			pointer = conv ~= nil and ffi.cast(conv.pointer, imagedata:get_ffi_pointer()) or nil,
 			tolua = conv ~= nil and conv.tolua or nil,
 			fromlua = conv ~= nil and conv.fromlua or nil,
 		}
@@ -355,7 +355,7 @@ local objectcache = setmetatable({}, {
 
 -- Overwrite existing functions with new FFI versions.
 
-function ImageData:mapPixel(func, ix, iy, iw, ih)
+function ImageData:map_pixel(func, ix, iy, iw, ih)
 	local p = objectcache[self]
 	local idw, idh = p.width, p.height
 
@@ -364,15 +364,15 @@ function ImageData:mapPixel(func, ix, iy, iw, ih)
 	iw = iw or idw
 	ih = ih or idh
 
-	if type(ix) ~= "number" then error("bad argument #2 to ImageData:mapPixel (expected number)", 2) end
-	if type(iy) ~= "number" then error("bad argument #3 to ImageData:mapPixel (expected number)", 2) end
-	if type(iw) ~= "number" then error("bad argument #4 to ImageData:mapPixel (expected number)", 2) end
-	if type(ih) ~= "number" then error("bad argument #5 to ImageData:mapPixel (expected number)", 2) end
+	if type(ix) ~= "number" then error("bad argument #2 to ImageData:map_pixel (expected number)", 2) end
+	if type(iy) ~= "number" then error("bad argument #3 to ImageData:map_pixel (expected number)", 2) end
+	if type(iw) ~= "number" then error("bad argument #4 to ImageData:map_pixel (expected number)", 2) end
+	if type(ih) ~= "number" then error("bad argument #5 to ImageData:map_pixel (expected number)", 2) end
 
-	if type(func) ~= "function" then error("bad argument #1 to ImageData:mapPixel (expected function)", 2) end
+	if type(func) ~= "function" then error("bad argument #1 to ImageData:map_pixel (expected function)", 2) end
 	if not (inside(ix, iy, idw, idh) and inside(ix+iw-1, iy+ih-1, idw, idh)) then error("Invalid rectangle dimensions", 2) end
 
-	if p.pointer == nil then error("ImageData:mapPixel does not currently support the "..p.format.." pixel format.", 2) end
+	if p.pointer == nil then error("ImageData:map_pixel does not currently support the "..p.format.." pixel format.", 2) end
 
 	ix = floor(ix)
 	iy = floor(iy)
@@ -392,9 +392,9 @@ function ImageData:mapPixel(func, ix, iy, iw, ih)
 	end
 end
 
-function ImageData:getPixel(x, y)
-	if type(x) ~= "number" then error("bad argument #1 to ImageData:getPixel (expected number)", 2) end
-	if type(y) ~= "number" then error("bad argument #2 to ImageData:getPixel (expected number)", 2) end
+function ImageData:get_pixel(x, y)
+	if type(x) ~= "number" then error("bad argument #1 to ImageData:get_pixel (expected number)", 2) end
+	if type(y) ~= "number" then error("bad argument #2 to ImageData:get_pixel (expected number)", 2) end
 
 	x = floor(x)
 	y = floor(y)
@@ -402,15 +402,15 @@ function ImageData:getPixel(x, y)
 	local p = objectcache[self]
 	if not inside(x, y, p.width, p.height) then error("Attempt to get out-of-range pixel!", 2) end
 
-	if p.pointer == nil then error("ImageData:getPixel does not currently support the "..p.format.." pixel format.", 2) end
+	if p.pointer == nil then error("ImageData:get_pixel does not currently support the "..p.format.." pixel format.", 2) end
 
 	local pixel = p.pointer[y * p.width + x]
 	return p.tolua(pixel)
 end
 
-function ImageData:setPixel(x, y, r, g, b, a)
-	if type(x) ~= "number" then error("bad argument #1 to ImageData:setPixel (expected number)", 2) end
-	if type(y) ~= "number" then error("bad argument #2 to ImageData:setPixel (expected number)", 2) end
+function ImageData:set_pixel(x, y, r, g, b, a)
+	if type(x) ~= "number" then error("bad argument #1 to ImageData:set_pixel (expected number)", 2) end
+	if type(y) ~= "number" then error("bad argument #2 to ImageData:set_pixel (expected number)", 2) end
 
 	x = floor(x)
 	y = floor(y)
@@ -420,33 +420,33 @@ function ImageData:setPixel(x, y, r, g, b, a)
 		r, g, b, a = t[1], t[2], t[3], t[4]
 	end
 
-	if type(r) ~= "number" then error("bad red color component argument to ImageData:setPixel (expected number)", 2) end
-	if type(g) ~= "number" then error("bad green color component argument to ImageData:setPixel (expected number)", 2) end
-	if type(b) ~= "number" then error("bad blue color component argument to ImageData:setPixel (expected number)", 2) end
-	if a ~= nil and type(a) ~= "number" then error("bad alpha color component argument to ImageData:setPixel (expected number)", 2) end
+	if type(r) ~= "number" then error("bad red color component argument to ImageData:set_pixel (expected number)", 2) end
+	if type(g) ~= "number" then error("bad green color component argument to ImageData:set_pixel (expected number)", 2) end
+	if type(b) ~= "number" then error("bad blue color component argument to ImageData:set_pixel (expected number)", 2) end
+	if a ~= nil and type(a) ~= "number" then error("bad alpha color component argument to ImageData:set_pixel (expected number)", 2) end
 
 	local p = objectcache[self]
 	if not inside(x, y, p.width, p.height) then error("Attempt to set out-of-range pixel!", 2) end
 
-	if p.pointer == nil then error("ImageData:setPixel does not currently support the "..p.format.." pixel format.", 2) end
+	if p.pointer == nil then error("ImageData:set_pixel does not currently support the "..p.format.." pixel format.", 2) end
 
 	p.fromlua(p.pointer[y * p.width + x], r, g, b, a)
 end
 
-function ImageData:getWidth()
+function ImageData:get_width()
 	return objectcache[self].width
 end
 
-function ImageData:getHeight()
+function ImageData:get_height()
 	return objectcache[self].height
 end
 
-function ImageData:getDimensions()
+function ImageData:get_dimensions()
 	local p = objectcache[self]
 	return p.width, p.height
 end
 
-function ImageData:getFormat()
+function ImageData:get_format()
 	return objectcache[self].format
 end
 

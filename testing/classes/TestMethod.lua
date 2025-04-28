@@ -14,7 +14,7 @@ TestMethod = {
       testmodule = testmodule,
       method = method,
       asserts = {},
-      start = love.timer.getTime(),
+      start = love.timer.get_time(),
       finish = 0,
       count = 0,
       passed = false,
@@ -53,7 +53,7 @@ TestMethod = {
   end,
 
 
-  -- @method - TestMethod:assertEquals()
+  -- @method - TestMethod:assert_equals()
   -- @desc - used to assert two values are equals
   -- @param {any} expected - expected value of the test
   -- @param {any} actual - actual value of the test
@@ -71,7 +71,7 @@ TestMethod = {
   end,
 
 
-  -- @method - TestMethod:assertTrue()
+  -- @method - TestMethod:assert_true()
   -- @desc - used to assert a value is true
   -- @param {any} value - value to test
   -- @param {string} label - label for this test to use in exports
@@ -88,7 +88,7 @@ TestMethod = {
   end,
 
 
-  -- @method - TestMethod:assertFalse()
+  -- @method - TestMethod:assert_false()
   -- @desc - used to assert a value is false
   -- @param {any} value - value to test
   -- @param {string} label - label for this test to use in exports
@@ -105,7 +105,7 @@ TestMethod = {
   end,
 
 
-  -- @method - TestMethod:assertNotEquals()
+  -- @method - TestMethod:assert_not_equals()
   -- @desc - used to assert two values are not equal
   -- @param {any} expected - expected value of the test
   -- @param {any} actual - actual value of the test
@@ -123,7 +123,7 @@ TestMethod = {
   end,
 
 
-  -- @method - TestMethod:assertRange()
+  -- @method - TestMethod:assert_range()
   -- @desc - used to check a value is within an expected range
   -- @param {number} actual - actual value of the test
   -- @param {number} min - minimum value the actual should be >= to
@@ -142,7 +142,7 @@ TestMethod = {
   end,
 
 
-  -- @method - TestMethod:assertMatch()
+  -- @method - TestMethod:assert_match()
   -- @desc - used to check a value is within a list of values
   -- @param {number} list - list of valid values for the test
   -- @param {number} actual - actual value of the test to check is in the list
@@ -164,7 +164,7 @@ TestMethod = {
   end,
 
 
-  -- @method - TestMethod:assertGreaterEqual()
+  -- @method - TestMethod:assert_greater_equal()
   -- @desc - used to check a value is >= than a certain target value
   -- @param {any} target - value to check the test agaisnt
   -- @param {any} actual - actual value of the test
@@ -186,7 +186,7 @@ TestMethod = {
   end,
 
 
-  -- @method - TestMethod:assertLessEqual()
+  -- @method - TestMethod:assert_less_equal()
   -- @desc - used to check a value is <= than a certain target value
   -- @param {any} target - value to check the test agaisnt
   -- @param {any} actual - actual value of the test
@@ -208,22 +208,22 @@ TestMethod = {
   end,
 
 
-  -- @method - TestMethod:assertObject()
+  -- @method - TestMethod:assert_object()
   -- @desc - used to check a table is a love object, this runs 3 seperate
   --         tests to check table has the basic properties of an object
   -- @note - actual object functionality tests have their own methods
   -- @param {table} obj - table to check is a valid love object
   -- @return {nil}
   assertObject = function(self, obj)
-    self:assertNotNil(obj)
-    self:assertEquals('userdata', type(obj), 'check is userdata')
+    self:assert_not_nil(obj)
+    self:assert_equals('userdata', type(obj), 'check is userdata')
     if obj ~= nil then
-      self:assertNotEquals(nil, obj:type(), 'check has :type()')
+      self:assert_not_equals(nil, obj:type(), 'check has :type()')
     end
   end,
 
 
-  -- @method - TestMethod:assertCoords()
+  -- @method - TestMethod:assert_coords()
   -- @desc - used to check a pair of values (usually coordinates)
   -- @param {table} obj - table to check is a valid love object
   -- @return {nil}
@@ -246,12 +246,12 @@ TestMethod = {
   end,
 
 
-  -- @method - TestMethod:assertNotNil()
+  -- @method - TestMethod:assert_not_nil()
   -- @desc - quick assert for value not nil
   -- @param {any} value - value to check not nil
   -- @return {nil}
   assertNotNil = function (self, value, err)
-    self:assertNotEquals(nil, value, 'check not nil')
+    self:assert_not_equals(nil, value, 'check not nil')
     if err ~= nil then
       table.insert(self.asserts, {
         key = 'assert ' .. tostring(self.count),
@@ -263,7 +263,7 @@ TestMethod = {
   end,
 
 
-  -- @method - TestMethod:compareImg()
+  -- @method - TestMethod:compare_img()
   -- @desc - compares a given image to the 'expected' version, with a tolerance of
   --         1px in any direction, and then saves it as the 'actual' version for
   --         report viewing
@@ -272,11 +272,11 @@ TestMethod = {
   compareImg = function(self, imgdata)
     local expected_path = 'tempoutput/expected/love.test.graphics.' ..
       self.method .. '-' .. tostring(self.imgs) .. '.png'
-    local ok, chunk, _ = pcall(love.image.newImageData, expected_path)
-    if ok == false then return self:assertEquals(true, false, chunk) end
+    local ok, chunk, _ = pcall(love.image.new_image_data, expected_path)
+    if ok == false then return self:assert_equals(true, false, chunk) end
     local expected = chunk
-    local iw = imgdata:getWidth()-1
-    local ih = imgdata:getHeight()-1
+    local iw = imgdata:get_width()-1
+    local ih = imgdata:get_height()-1
     local differences = {}
     local rgba_tolerance = self.rgba_tolerance * (1/255)
 
@@ -284,19 +284,19 @@ TestMethod = {
     -- by default rgba_tolerance is 0
     for ix=0,iw do
       for iy=0,ih do
-        local ir, ig, ib, ia = imgdata:getPixel(ix, iy)
+        local ir, ig, ib, ia = imgdata:get_pixel(ix, iy)
         local points = {
-          {expected:getPixel(ix, iy)}
+          {expected:get_pixel(ix, iy)}
         }
         if self.pixel_tolerance > 0 then
-          if ix > 0 and iy < ih-1 then table.insert(points, {expected:getPixel(ix-1, iy+1)}) end
-          if ix > 0 then table.insert(points, {expected:getPixel(ix-1, iy)}) end
-          if ix > 0 and iy > 0 then table.insert(points, {expected:getPixel(ix-1, iy-1)}) end
-          if iy < ih-1 then table.insert(points, {expected:getPixel(ix, iy+1)}) end
-          if iy > 0 then table.insert(points, {expected:getPixel(ix, iy-1)}) end
-          if ix < iw-1 and iy < ih-1 then table.insert(points, {expected:getPixel(ix+1, iy+1)}) end
-          if ix < iw-1 then table.insert(points, {expected:getPixel(ix+1, iy)}) end
-          if ix < iw-1 and iy > 0 then table.insert(points, {expected:getPixel(ix+1, iy-1)}) end
+          if ix > 0 and iy < ih-1 then table.insert(points, {expected:get_pixel(ix-1, iy+1)}) end
+          if ix > 0 then table.insert(points, {expected:get_pixel(ix-1, iy)}) end
+          if ix > 0 and iy > 0 then table.insert(points, {expected:get_pixel(ix-1, iy-1)}) end
+          if iy < ih-1 then table.insert(points, {expected:get_pixel(ix, iy+1)}) end
+          if iy > 0 then table.insert(points, {expected:get_pixel(ix, iy-1)}) end
+          if ix < iw-1 and iy < ih-1 then table.insert(points, {expected:get_pixel(ix+1, iy+1)}) end
+          if ix < iw-1 then table.insert(points, {expected:get_pixel(ix+1, iy)}) end
+          if ix < iw-1 and iy > 0 then table.insert(points, {expected:get_pixel(ix+1, iy-1)}) end
         end
         local has_match_r = false
         local has_match_g = false
@@ -317,7 +317,7 @@ TestMethod = {
         if has_match_b then ymatch = ymatch .. 'b' else nmatch = nmatch .. 'b' end
         if has_match_a then ymatch = ymatch .. 'a' else nmatch = nmatch .. 'a' end
         local pixel = tostring(ir)..','..tostring(ig)..','..tostring(ib)..','..tostring(ia)
-        self:assertEquals(true, matching, 'compare image pixel (' .. pixel .. ') at ' ..
+        self:assert_equals(true, matching, 'compare image pixel (' .. pixel .. ') at ' ..
           tostring(ix) .. ',' .. tostring(iy) .. ', matching = ' .. ymatch ..
           ', not matching = ' .. nmatch .. ' (' .. self.method .. '-' .. tostring(self.imgs) .. ')'
         )
@@ -336,18 +336,18 @@ TestMethod = {
     local dpath = 'tempoutput/difference/love.test.graphics.' ..
       self.method .. '-' .. tostring(self.imgs) .. '.png'
     if #differences > 0 then
-      local difference = love.graphics.newCanvas(iw+1, ih+1)
-      love.graphics.setCanvas(difference)
+      local difference = love.graphics.new_canvas(iw+1, ih+1)
+      love.graphics.set_canvas(difference)
         love.graphics.clear(0, 0, 0, 1)
-        love.graphics.setColor(1, 0, 1, 1)
+        love.graphics.set_color(1, 0, 1, 1)
         love.graphics.points(differences)
-        love.graphics.setColor(1, 1, 1, 1)
-      love.graphics.setCanvas()
-      love.graphics.readbackTexture(difference):encode('png', dpath)
+        love.graphics.set_color(1, 1, 1, 1)
+      love.graphics.set_canvas()
+      love.graphics.readback_texture(difference):encode('png', dpath)
 
     -- otherwise clear the old difference file (if any) to stop it coming up 
     -- in future reports when there's no longer a difference
-    elseif love.filesystem.openFile(dpath, 'r') then
+    elseif love.filesystem.open_file(dpath, 'r') then
       love.filesystem.remove(dpath)
     end
 
@@ -355,7 +355,7 @@ TestMethod = {
   end,
 
 
-  -- @method - TestMethod:exportImg()
+  -- @method - TestMethod:export_img()
   -- @desc - exports the given imgdata to the 'output/expected/' folder, to use when
   --         writing new graphics tests to set the expected image output
   -- @NOTE - you should not leave this method in when you are finished this is
@@ -372,7 +372,7 @@ TestMethod = {
   end,
 
 
-  -- @method - TestMethod:skipTest()
+  -- @method - TestMethod:skip_test()
   -- @desc - used to mark this test as skipped for a specific reason
   -- @param {string} reason - reason why method is being skipped
   -- @return {nil}
@@ -382,7 +382,7 @@ TestMethod = {
   end,
 
 
-  -- @method - TestMethod:waitFrames()
+  -- @method - TestMethod:wait_frames()
   -- @desc - yields the method for x amount of frames
   -- @param {number} frames - no. frames to wait
   -- @return {nil}
@@ -391,19 +391,19 @@ TestMethod = {
   end,
 
 
-  -- @method - TestMethod:waitSeconds()
+  -- @method - TestMethod:wait_seconds()
   -- @desc - yields the method for x amount of seconds
   -- @param {number} seconds - no. seconds to wait
   -- @return {nil}
   waitSeconds = function(self, seconds)
-    local start = love.timer.getTime()
-    while love.timer.getTime() < start + seconds do
+    local start = love.timer.get_time()
+    while love.timer.get_time() < start + seconds do
       coroutine.yield()
     end
   end,
 
 
-  -- @method - TestMethod:isOS()
+  -- @method - TestMethod:is_os()
   -- @desc - checks for a specific OS (or list of OSs)
   -- @param {string/s} - each arg passed will be checked as a valid OS, as long
   --                     as one passed the function will return true
@@ -415,7 +415,7 @@ TestMethod = {
     return false
   end,
 
-  -- @method - TestMethod:isLuaVersion()
+  -- @method - TestMethod:is_lua_version()
   -- @desc - checks for a specific Lua version (or list of versions)
   -- @param {number} - the minimum Lua version to check against
   -- @return {boolean} - returns true if the current Lua version is at least the given version
@@ -423,14 +423,14 @@ TestMethod = {
     return love.test.lua_version >= version
   end,
 
-  -- @method - TestMethod:isLuaJITEnabled()
+  -- @method - TestMethod:is_lua_jit_enabled()
   -- @desc - checks if LuaJIT is enabled
   -- @return {boolean} - returns true if LuaJIT is enabled
   isLuaJITEnabled = function(self)
     return love.test.has_lua_jit
   end,
 
-  -- @method - TestMethod:evaluateTest()
+  -- @method - TestMethod:evaluate_test()
   -- @desc - evaluates the results of all assertions for a final restult
   -- @return {nil}
   evaluateTest = function(self)
@@ -518,21 +518,21 @@ TestMethod = {
         end
       end
     end
-    self:printResult()
+    self:print_result()
   end,
 
 
-  -- @method - TestMethod:printResult()
+  -- @method - TestMethod:print_result()
   -- @desc - prints the result of the test to the console as well as appends
   --         the XML + HTML for the test to the testsuite output
   -- @return {nil}
   printResult = function(self)
 
     -- get total timestamp
-    self.finish = love.timer.getTime() - self.start
+    self.finish = love.timer.get_time() - self.start
     love.test.time = love.test.time + self.finish
     self.testmodule.time = self.testmodule.time + self.finish
-    local endtime = UtilTimeFormat(love.timer.getTime() - self.start)
+    local endtime = UtilTimeFormat(love.timer.get_time() - self.start)
 
     -- get failure/skip message for output (if any)
     local failure = ''
@@ -563,11 +563,11 @@ TestMethod = {
       local filename = 'love.test.graphics.' .. self.method
       for f=1,5 do
         local fstr = tostring(f)
-        if love.filesystem.openFile('tempoutput/actual/' .. filename .. '-' .. fstr .. '.png', 'r') then
+        if love.filesystem.open_file('tempoutput/actual/' .. filename .. '-' .. fstr .. '.png', 'r') then
           preview = preview .. '<div class="preview-wrap">'
           preview = preview .. '<div class="preview">' .. '<img src="expected/' .. filename .. '-' .. fstr .. '.png"/><p>Expected</p></div>' ..
             '<div class="preview">' .. '<img src="actual/' .. filename .. '-' .. fstr .. '.png"/><p>Actual</p></div>'
-          if love.filesystem.openFile('tempoutput/difference/' .. filename .. '-' .. fstr .. '.png', 'r') then
+          if love.filesystem.open_file('tempoutput/difference/' .. filename .. '-' .. fstr .. '.png', 'r') then
             preview = preview .. '<div class="preview">' .. '<img src="difference/' .. filename .. '-' .. fstr .. '.png"/><p>Difference</p></div>'
           end
           preview = preview .. '</div>'

@@ -207,17 +207,17 @@ int w_isModifierActive(lua_State* L)
 // List of functions to wrap.
 static const luaL_Reg functions[] =
 {
-	{ "setKeyRepeat", w_setKeyRepeat },
-	{ "hasKeyRepeat", w_hasKeyRepeat },
-	{ "setTextInput", w_setTextInput },
-	{ "hasTextInput", w_hasTextInput },
-	{ "hasScreenKeyboard", w_hasScreenKeyboard },
-	{ "isScreenKeyboardVisible", w_isScreenKeyboardVisible },
-	{ "isDown", w_isDown },
-	{ "isScancodeDown", w_isScancodeDown },
-	{ "getScancodeFromKey", w_getScancodeFromKey },
-	{ "getKeyFromScancode", w_getKeyFromScancode },
-	{ "isModifierActive", w_isModifierActive },
+	{ "set_key_repeat", w_setKeyRepeat },
+	{ "has_key_repeat", w_hasKeyRepeat },
+	{ "set_text_input", w_setTextInput },
+	{ "has_text_input", w_hasTextInput },
+	{ "has_screen_keyboard", w_hasScreenKeyboard },
+	{ "is_screen_keyboard_visible", w_isScreenKeyboardVisible },
+	{ "is_down", w_isDown },
+	{ "is_scancode_down", w_isScancodeDown },
+	{ "get_scancode_from_key", w_getScancodeFromKey },
+	{ "get_key_from_scancode", w_getKeyFromScancode },
+	{ "is_modifier_active", w_isModifierActive },
 	{ 0, 0 }
 };
 

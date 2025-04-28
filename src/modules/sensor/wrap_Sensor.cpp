@@ -90,11 +90,11 @@ static int w_getName(lua_State *L)
 
 static const luaL_Reg functions[] =
 {
-	{ "hasSensor", w_hasSensor },
-	{ "isEnabled", w_isEnabled },
-	{ "setEnabled", w_setEnabled },
-	{ "getData", w_getData },
-	{ "getName", w_getName },
+	{ "has_sensor", w_hasSensor },
+	{ "is_enabled", w_isEnabled },
+	{ "set_enabled", w_setEnabled },
+	{ "get_data", w_getData },
+	{ "get_name", w_getName },
 	{ nullptr, nullptr }
 };
 

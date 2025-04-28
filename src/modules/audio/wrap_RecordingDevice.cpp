@@ -140,13 +140,13 @@ static const luaL_Reg w_RecordingDevice_functions[] =
 {
 	{ "start", w_RecordingDevice_start },
 	{ "stop", w_RecordingDevice_stop },
-	{ "getData", w_RecordingDevice_getData },
-	{ "getSampleCount", w_RecordingDevice_getSampleCount },
-	{ "getSampleRate", w_RecordingDevice_getSampleRate },
-	{ "getBitDepth", w_RecordingDevice_getBitDepth },
-	{ "getChannelCount", w_RecordingDevice_getChannelCount },
-	{ "getName", w_RecordingDevice_getName },
-	{ "isRecording", w_RecordingDevice_isRecording },
+	{ "get_data", w_RecordingDevice_getData },
+	{ "get_sample_count", w_RecordingDevice_getSampleCount },
+	{ "get_sample_rate", w_RecordingDevice_getSampleRate },
+	{ "get_bit_depth", w_RecordingDevice_getBitDepth },
+	{ "get_channel_count", w_RecordingDevice_getChannelCount },
+	{ "get_name", w_RecordingDevice_getName },
+	{ "is_recording", w_RecordingDevice_isRecording },
 	{ 0, 0 }
 };
 

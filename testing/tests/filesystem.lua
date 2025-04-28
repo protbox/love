@@ -8,57 +8,57 @@
 --------------------------------------------------------------------------------
 
 
--- File (love.filesystem.newFile)
+-- File (love.filesystem.new_file)
 love.test.filesystem.File = function(test)
 
   -- setup a file to play with
-  local file1 = love.filesystem.openFile('data.txt', 'w')
+  local file1 = love.filesystem.open_file('data.txt', 'w')
   file1:write('helloworld')
-  test:assertObject(file1)
+  test:assert_object(file1)
   file1:close()
 
   -- test read mode
   file1:open('r')
-  test:assertEquals('r', file1:getMode(), 'check read mode')
+  test:assert_equals('r', file1:get_mode(), 'check read mode')
   local contents, size = file1:read()
-  test:assertEquals('helloworld', contents)
-  test:assertEquals(10, size, 'check file read')
-  test:assertEquals(10, file1:getSize())
+  test:assert_equals('helloworld', contents)
+  test:assert_equals(10, size, 'check file read')
+  test:assert_equals(10, file1:get_size())
   local ok1, err1 = file1:write('hello')
-  test:assertNotEquals(nil, err1, 'check cant write in read mode')
+  test:assert_not_equals(nil, err1, 'check cant write in read mode')
   local iterator = file1:lines()
-  test:assertNotEquals(nil, iterator, 'check can read lines')
-  test:assertEquals('data.txt', file1:getFilename(), 'check filename matches')
+  test:assert_not_equals(nil, iterator, 'check can read lines')
+  test:assert_equals('data.txt', file1:get_filename(), 'check filename matches')
   file1:close()
 
   -- test write mode
   file1:open('w')
-  test:assertEquals('w', file1:getMode(), 'check write mode')
+  test:assert_equals('w', file1:get_mode(), 'check write mode')
   contents, size = file1:read()
-  test:assertEquals(nil, contents, 'check cant read file in write mode')
-  test:assertEquals('string', type(size), 'check err message shown')
+  test:assert_equals(nil, contents, 'check cant read file in write mode')
+  test:assert_equals('string', type(size), 'check err message shown')
   local ok2, err2 = file1:write('helloworld')
-  test:assertTrue(ok2, 'check file write')
-  test:assertEquals(nil, err2, 'check no err writing')
+  test:assert_true(ok2, 'check file write')
+  test:assert_equals(nil, err2, 'check no err writing')
 
   -- test open/closing
   file1:open('r')
-  test:assertTrue(file1:isOpen(), 'check file is open')
+  test:assert_true(file1:is_open(), 'check file is open')
   file1:close()
-  test:assertFalse(file1:isOpen(), 'check file gets closed')
+  test:assert_false(file1:is_open(), 'check file gets closed')
   file1:close()
 
   -- test buffering and flushing
   file1:open('w')
-  local ok3, err3 = file1:setBuffer('full', 10000)
-  test:assertTrue(ok3)
-  test:assertEquals('full', file1:getBuffer())
+  local ok3, err3 = file1:set_buffer('full', 10000)
+  test:assert_true(ok3)
+  test:assert_equals('full', file1:get_buffer())
   file1:write('replacedcontent')
   file1:flush()
   file1:close()
   file1:open('r')
   contents, size = file1:read()
-  test:assertEquals('replacedcontent', contents, 'check buffered content was written')
+  test:assert_equals('replacedcontent', contents, 'check buffered content was written')
   file1:close()
 
   -- loop through file data with seek/tell until EOF
@@ -66,36 +66,36 @@ love.test.filesystem.File = function(test)
   local counter = 0
   for i=1,100 do
     file1:seek(i)
-    test:assertEquals(i, file1:tell())
-    if file1:isEOF() == true then
+    test:assert_equals(i, file1:tell())
+    if file1:is_eof() == true then
       counter = i
       break
     end
   end
-  test:assertEquals(counter, 15)
+  test:assert_equals(counter, 15)
   file1:close()
 
 end
 
 
--- FileData (love.filesystem.newFileData)
+-- FileData (love.filesystem.new_file_data)
 love.test.filesystem.FileData = function(test)
 
   -- create new obj
-  local fdata = love.filesystem.newFileData('helloworld', 'test.txt')
-  test:assertObject(fdata)
-  test:assertEquals('test.txt', fdata:getFilename())
-  test:assertEquals('txt', fdata:getExtension())
+  local fdata = love.filesystem.new_file_data('helloworld', 'test.txt')
+  test:assert_object(fdata)
+  test:assert_equals('test.txt', fdata:get_filename())
+  test:assert_equals('txt', fdata:get_extension())
 
   -- check properties match expected
-  test:assertEquals('helloworld', fdata:getString(), 'check data string')
-  test:assertEquals(10, fdata:getSize(), 'check data size')
+  test:assert_equals('helloworld', fdata:get_string(), 'check data string')
+  test:assert_equals(10, fdata:get_size(), 'check data size')
 
   -- check cloning the bytedata
   local clonedfdata = fdata:clone()
-  test:assertObject(clonedfdata)
-  test:assertEquals('helloworld', clonedfdata:getString(), 'check cloned data')
-  test:assertEquals(10, clonedfdata:getSize(), 'check cloned size')
+  test:assert_object(clonedfdata)
+  test:assert_equals('helloworld', clonedfdata:get_string(), 'check cloned data')
+  test:assert_equals(10, clonedfdata:get_size(), 'check cloned size')
 
 end
 
@@ -113,72 +113,72 @@ love.test.filesystem.append = function(test)
 	love.filesystem.write('filesystem.append.txt', 'foo')
 	-- try appending text and check new file contents/size matches
 	local success, message = love.filesystem.append('filesystem.append.txt', 'bar')
-  test:assertNotEquals(false, success, 'check success')
-  test:assertEquals(nil, message, 'check no error msg')
+  test:assert_not_equals(false, success, 'check success')
+  test:assert_equals(nil, message, 'check no error msg')
 	local contents, size = love.filesystem.read('filesystem.append.txt')
-	test:assertEquals(contents, 'foobar', 'check file contents')
-	test:assertEquals(size, 6, 'check file size')
+	test:assert_equals(contents, 'foobar', 'check file contents')
+	test:assert_equals(size, 6, 'check file size')
   -- check appending a specific no. of bytes
   love.filesystem.append('filesystem.append.txt', 'foobarfoobarfoo', 6)
   contents, size = love.filesystem.read('filesystem.append.txt')
-  test:assertEquals(contents, 'foobarfoobar', 'check appended contents')
-  test:assertEquals(size, 12, 'check appended size')
+  test:assert_equals(contents, 'foobarfoobar', 'check appended contents')
+  test:assert_equals(size, 12, 'check appended size')
   -- cleanup
   love.filesystem.remove('filesystem.append.txt')
 end
 
 
--- love.filesystem.areSymlinksEnabled
+-- love.filesystem.are_symlinks_enabled
 -- @NOTE best can do here is just check not nil
-love.test.filesystem.areSymlinksEnabled = function(test)
-  test:assertNotNil(love.filesystem.areSymlinksEnabled())
+love.test.filesystem.are_symlinks_enabled = function(test)
+  test:assert_not_nil(love.filesystem.are_symlinks_enabled())
 end
 
 
--- love.filesystem.createDirectory
-love.test.filesystem.createDirectory = function(test)
+-- love.filesystem.create_directory
+love.test.filesystem.create_directory = function(test)
   -- try creating a dir + subdir and check both exist
-  local success = love.filesystem.createDirectory('foo/bar')
-  test:assertNotEquals(false, success, 'check success')
-  test:assertNotEquals(nil, love.filesystem.getInfo('foo', 'directory'), 'check directory created')
-  test:assertNotEquals(nil, love.filesystem.getInfo('foo/bar', 'directory'), 'check subdirectory created')
+  local success = love.filesystem.create_directory('foo/bar')
+  test:assert_not_equals(false, success, 'check success')
+  test:assert_not_equals(nil, love.filesystem.get_info('foo', 'directory'), 'check directory created')
+  test:assert_not_equals(nil, love.filesystem.get_info('foo/bar', 'directory'), 'check subdirectory created')
   -- cleanup
   love.filesystem.remove('foo/bar')
   love.filesystem.remove('foo')
 end
 
 
--- love.filesystem.getAppdataDirectory
+-- love.filesystem.get_appdata_directory
 -- @NOTE i think this is too platform dependent to be tested nicely
-love.test.filesystem.getAppdataDirectory = function(test)
-  test:assertNotNil(love.filesystem.getAppdataDirectory())
+love.test.filesystem.get_appdata_directory = function(test)
+  test:assert_not_nil(love.filesystem.get_appdata_directory())
 end
 
 
--- love.filesystem.getCRequirePath
-love.test.filesystem.getCRequirePath = function(test)
+-- love.filesystem.get_c_require_path
+love.test.filesystem.get_c_require_path = function(test)
   -- check default value from documentation
-  test:assertEquals('??', love.filesystem.getCRequirePath(), 'check default value')
+  test:assert_equals('??', love.filesystem.get_c_require_path(), 'check default value')
 end
 
 
--- love.filesystem.getDirectoryItems
-love.test.filesystem.getDirectoryItems = function(test)
+-- love.filesystem.get_directory_items
+love.test.filesystem.get_directory_items = function(test)
   -- create a dir + subdir with 2 files
-  love.filesystem.createDirectory('foo/bar')
+  love.filesystem.create_directory('foo/bar')
 	love.filesystem.write('foo/file1.txt', 'file1')
   love.filesystem.write('foo/bar/file2.txt', 'file2')
   -- check both the file + subdir exist in the item list
-  local files = love.filesystem.getDirectoryItems('foo')
+  local files = love.filesystem.get_directory_items('foo')
   local hasfile = false
   local hasdir = false
   for _,v in ipairs(files) do
-    local info = love.filesystem.getInfo('foo/'..v)
+    local info = love.filesystem.get_info('foo/'..v)
     if v == 'bar' and info.type == 'directory' then hasdir = true end
     if v == 'file1.txt' and info.type == 'file' then hasfile = true end
   end
-  test:assertTrue(hasfile, 'check file exists')
-  test:assertTrue(hasdir, 'check directory exists')
+  test:assert_true(hasfile, 'check file exists')
+  test:assert_true(hasdir, 'check directory exists')
   -- cleanup
   love.filesystem.remove('foo/file1.txt')
   love.filesystem.remove('foo/bar/file2.txt')
@@ -187,104 +187,104 @@ love.test.filesystem.getDirectoryItems = function(test)
 end
 
 
--- love.filesystem.getFullCommonPath
-love.test.filesystem.getFullCommonPath = function(test)
+-- love.filesystem.get_full_common_path
+love.test.filesystem.get_full_common_path = function(test)
   -- check standard paths
-  local appsavedir = love.filesystem.getFullCommonPath('appsavedir')
-  local appdocuments = love.filesystem.getFullCommonPath('appdocuments')
-  local userhome = love.filesystem.getFullCommonPath('userhome')
-  local userappdata = love.filesystem.getFullCommonPath('userappdata')
-  local userdesktop = love.filesystem.getFullCommonPath('userdesktop')
-  local userdocuments = love.filesystem.getFullCommonPath('userdocuments')
-  test:assertNotNil(appsavedir)
-  test:assertNotNil(appdocuments)
-  test:assertNotNil(userhome)
-  test:assertNotNil(userappdata)
-  test:assertNotNil(userdesktop)
-  test:assertNotNil(userdocuments)
+  local appsavedir = love.filesystem.get_full_common_path('appsavedir')
+  local appdocuments = love.filesystem.get_full_common_path('appdocuments')
+  local userhome = love.filesystem.get_full_common_path('userhome')
+  local userappdata = love.filesystem.get_full_common_path('userappdata')
+  local userdesktop = love.filesystem.get_full_common_path('userdesktop')
+  local userdocuments = love.filesystem.get_full_common_path('userdocuments')
+  test:assert_not_nil(appsavedir)
+  test:assert_not_nil(appdocuments)
+  test:assert_not_nil(userhome)
+  test:assert_not_nil(userappdata)
+  test:assert_not_nil(userdesktop)
+  test:assert_not_nil(userdocuments)
   -- check invalid path
-  local ok = pcall(love.filesystem.getFullCommonPath, 'fakepath')
-  test:assertFalse(ok, 'check invalid common path')
+  local ok = pcall(love.filesystem.get_full_common_path, 'fakepath')
+  test:assert_false(ok, 'check invalid common path')
 end
 
 
--- love.filesystem.getIdentity
-love.test.filesystem.getIdentity = function(test)
+-- love.filesystem.get_identity
+love.test.filesystem.get_identity = function(test)
   -- check setting identity matches
-  local original = love.filesystem.getIdentity()
-  love.filesystem.setIdentity('lover')
-  test:assertEquals('lover', love.filesystem.getIdentity(), 'check identity matches')
+  local original = love.filesystem.get_identity()
+  love.filesystem.set_identity('lover')
+  test:assert_equals('lover', love.filesystem.get_identity(), 'check identity matches')
   -- put back to original value
-  love.filesystem.setIdentity(original)
+  love.filesystem.set_identity(original)
 end
 
 
--- love.filesystem.getRealDirectory
-love.test.filesystem.getRealDirectory = function(test)
+-- love.filesystem.get_real_directory
+love.test.filesystem.get_real_directory = function(test)
   -- make a test dir + file first
-  love.filesystem.createDirectory('foo')
+  love.filesystem.create_directory('foo')
   love.filesystem.write('foo/test.txt', 'test')
   -- check save dir matches the real dir we just wrote to
-  test:assertEquals(love.filesystem.getSaveDirectory(),
-    love.filesystem.getRealDirectory('foo/test.txt'), 'check directory matches')
+  test:assert_equals(love.filesystem.get_save_directory(),
+    love.filesystem.get_real_directory('foo/test.txt'), 'check directory matches')
   -- cleanup
   love.filesystem.remove('foo/test.txt')
   love.filesystem.remove('foo')
 end
 
 
--- love.filesystem.getRequirePath
-love.test.filesystem.getRequirePath = function(test)
-  test:assertEquals('?.lua;?/init.lua',
-    love.filesystem.getRequirePath(), 'check default value')
+-- love.filesystem.get_require_path
+love.test.filesystem.get_require_path = function(test)
+  test:assert_equals('?.lua;?/init.lua',
+    love.filesystem.get_require_path(), 'check default value')
 end
 
 
--- love.filesystem.getSource
+-- love.filesystem.get_source
 -- @NOTE i dont think we can test this cos love calls it first
-love.test.filesystem.getSource = function(test)
-  test:skipTest('used internally')
+love.test.filesystem.get_source = function(test)
+  test:skip_test('used internally')
 end
 
 
--- love.filesystem.getSourceBaseDirectory
+-- love.filesystem.get_source_base_directory
 -- @NOTE i think this is too platform dependent to be tested nicely
-love.test.filesystem.getSourceBaseDirectory = function(test)
-  test:assertNotNil(love.filesystem.getSourceBaseDirectory())
+love.test.filesystem.get_source_base_directory = function(test)
+  test:assert_not_nil(love.filesystem.get_source_base_directory())
 end
 
 
--- love.filesystem.getUserDirectory
+-- love.filesystem.get_user_directory
 -- @NOTE i think this is too platform dependent to be tested nicely
-love.test.filesystem.getUserDirectory = function(test)
-  test:assertNotNil(love.filesystem.getUserDirectory())
+love.test.filesystem.get_user_directory = function(test)
+  test:assert_not_nil(love.filesystem.get_user_directory())
 end
 
 
--- love.filesystem.getWorkingDirectory
+-- love.filesystem.get_working_directory
 -- @NOTE i think this is too platform dependent to be tested nicely
-love.test.filesystem.getWorkingDirectory = function(test)
-  test:assertNotNil(love.filesystem.getWorkingDirectory())
+love.test.filesystem.get_working_directory = function(test)
+  test:assert_not_nil(love.filesystem.get_working_directory())
 end
 
 
--- love.filesystem.getSaveDirectory
+-- love.filesystem.get_save_directory
 -- @NOTE i think this is too platform dependent to be tested nicely
-love.test.filesystem.getSaveDirectory = function(test)
-  test:assertNotNil(love.filesystem.getSaveDirectory())
+love.test.filesystem.get_save_directory = function(test)
+  test:assert_not_nil(love.filesystem.get_save_directory())
 end
 
 
--- love.filesystem.getInfo
-love.test.filesystem.getInfo = function(test)
+-- love.filesystem.get_info
+love.test.filesystem.get_info = function(test)
   -- create a dir and subdir with a file
-  love.filesystem.createDirectory('foo/bar')
+  love.filesystem.create_directory('foo/bar')
   love.filesystem.write('foo/bar/file2.txt', 'file2')
   -- check getinfo returns the correct values
-  test:assertEquals(nil, love.filesystem.getInfo('foo/bar/file2.txt', 'directory'), 'check not directory')
-  test:assertNotEquals(nil, love.filesystem.getInfo('foo/bar/file2.txt'), 'check info not nil')
-  test:assertEquals(love.filesystem.getInfo('foo/bar/file2.txt').size, 5, 'check info size match')
-  test:assertFalse(love.filesystem.getInfo('foo/bar/file2.txt').readonly, 'check readonly')
+  test:assert_equals(nil, love.filesystem.get_info('foo/bar/file2.txt', 'directory'), 'check not directory')
+  test:assert_not_equals(nil, love.filesystem.get_info('foo/bar/file2.txt'), 'check info not nil')
+  test:assert_equals(love.filesystem.get_info('foo/bar/file2.txt').size, 5, 'check info size match')
+  test:assert_false(love.filesystem.get_info('foo/bar/file2.txt').readonly, 'check readonly')
   -- @TODO test modified timestamp from info.modtime?
   -- cleanup
   love.filesystem.remove('foo/bar/file2.txt')
@@ -293,10 +293,10 @@ love.test.filesystem.getInfo = function(test)
 end
 
 
--- love.filesystem.isFused
-love.test.filesystem.isFused = function(test)
+-- love.filesystem.is_fused
+love.test.filesystem.is_fused = function(test)
   -- kinda assuming you'd run the testsuite in a non-fused game
-  test:assertEquals(love.filesystem.isFused(), false, 'check not fused')
+  test:assert_equals(love.filesystem.is_fused(), false, 'check not fused')
 end
 
 
@@ -306,9 +306,9 @@ love.test.filesystem.lines = function(test)
   love.filesystem.write('file.txt', 'line1\nline2\nline3')
   local linenum = 1
   for line in love.filesystem.lines('file.txt') do
-    test:assertEquals('line' .. tostring(linenum), line, 'check line matches')
+    test:assert_equals('line' .. tostring(linenum), line, 'check line matches')
     -- also check it removes newlines like the docs says it does
-    test:assertEquals(nil, string.find(line, '\n'), 'check newline removed')
+    test:assert_equals(nil, string.find(line, '\n'), 'check newline removed')
     linenum = linenum + 1
   end
   -- cleanup
@@ -322,30 +322,30 @@ love.test.filesystem.load = function(test)
   love.filesystem.write('test1.lua', 'function test()\nreturn 1\nend\nreturn test()')
   love.filesystem.write('test2.lua', 'function test()\nreturn 1')
 
-  if test:isAtLeastLuaVersion(5.2) or test:isLuaJITEnabled() then
+  if test:is_at_least_lua_version(5.2) or test:is_lua_jit_enabled() then
     -- check file that doesn't exist
     local chunk1, errormsg1 = love.filesystem.load('faker.lua', 'b')
-    test:assertEquals(nil, chunk1, 'check file doesnt exist')
+    test:assert_equals(nil, chunk1, 'check file doesnt exist')
     -- check valid lua file (text load)
     local chunk2, errormsg2 = love.filesystem.load('test1.lua', 't')
-    test:assertEquals(nil, errormsg2, 'check no error message')
-    test:assertEquals(1, chunk2(), 'check lua file runs')
+    test:assert_equals(nil, errormsg2, 'check no error message')
+    test:assert_equals(1, chunk2(), 'check lua file runs')
   else
     local _, errormsg3 = love.filesystem.load('test1.lua', 'b')
-    test:assertNotEquals(nil, errormsg3, 'check for an error message')
+    test:assert_not_equals(nil, errormsg3, 'check for an error message')
 
     local _, errormsg4 = love.filesystem.load('test1.lua', 't')
-    test:assertNotEquals(nil, errormsg4, 'check for an error message')
+    test:assert_not_equals(nil, errormsg4, 'check for an error message')
   end
 
   -- check valid lua file (any load)
   local chunk5, errormsg5 = love.filesystem.load('test1.lua', 'bt')
-  test:assertEquals(nil, errormsg5, 'check no error message')
-  test:assertEquals(1, chunk5(), 'check lua file runs')
+  test:assert_equals(nil, errormsg5, 'check no error message')
+  test:assert_equals(1, chunk5(), 'check lua file runs')
 
   -- check invalid lua file
   local ok, chunk, err = pcall(love.filesystem.load, 'test2.lua')
-  test:assertFalse(ok, 'check invalid lua file')
+  test:assert_false(ok, 'check invalid lua file')
   -- cleanup
   love.filesystem.remove('test1.lua')
   love.filesystem.remove('test2.lua')
@@ -359,11 +359,11 @@ love.test.filesystem.mount = function(test)
   love.filesystem.write('test.zip', contents, size)
   -- check mounting file and check contents are mounted
   local success = love.filesystem.mount('test.zip', 'test')
-  test:assertTrue(success, 'check success')
-  test:assertNotEquals(nil, love.filesystem.getInfo('test'), 'check mount not nil')
-  test:assertEquals('directory', love.filesystem.getInfo('test').type, 'check directory made')
-  test:assertNotEquals(nil, love.filesystem.getInfo('test/test.txt'), 'check file not nil')
-  test:assertEquals('file', love.filesystem.getInfo('test/test.txt').type, 'check file type')
+  test:assert_true(success, 'check success')
+  test:assert_not_equals(nil, love.filesystem.get_info('test'), 'check mount not nil')
+  test:assert_equals('directory', love.filesystem.get_info('test').type, 'check directory made')
+  test:assert_not_equals(nil, love.filesystem.get_info('test/test.txt'), 'check file not nil')
+  test:assert_equals('file', love.filesystem.get_info('test/test.txt').type, 'check file type')
   -- cleanup
   love.filesystem.remove('test/test.txt')
   love.filesystem.remove('test')
@@ -371,103 +371,103 @@ love.test.filesystem.mount = function(test)
 end
 
 
--- love.filesystem.mountFullPath
-love.test.filesystem.mountFullPath = function(test)
+-- love.filesystem.mount_full_path
+love.test.filesystem.mount_full_path = function(test)
   -- mount something in the working directory
-  local mount = love.filesystem.mountFullPath(love.filesystem.getSource() .. '/tests', 'tests', 'read')
-  test:assertTrue(mount, 'check can mount')
+  local mount = love.filesystem.mount_full_path(love.filesystem.get_source() .. '/tests', 'tests', 'read')
+  test:assert_true(mount, 'check can mount')
   -- check reading file through mounted path label
   local contents, _ = love.filesystem.read('tests/audio.lua')
-  test:assertNotEquals(nil, contents)
-  local unmount = love.filesystem.unmountFullPath(love.filesystem.getSource() .. '/tests')
-  test:assertTrue(unmount, 'reset mount')
+  test:assert_not_equals(nil, contents)
+  local unmount = love.filesystem.unmount_full_path(love.filesystem.get_source() .. '/tests')
+  test:assert_true(unmount, 'reset mount')
 end
 
 
--- love.filesystem.unmountFullPath
-love.test.filesystem.unmountFullPath = function(test)
+-- love.filesystem.unmount_full_path
+love.test.filesystem.unmount_full_path = function(test)
   -- try unmounting something we never mounted
-  local unmount1 = love.filesystem.unmountFullPath(love.filesystem.getSource() .. '/faker')
-  test:assertFalse(unmount1, 'check not mounted to start with')
+  local unmount1 = love.filesystem.unmount_full_path(love.filesystem.get_source() .. '/faker')
+  test:assert_false(unmount1, 'check not mounted to start with')
   -- mount something to unmount after
-  love.filesystem.mountFullPath(love.filesystem.getSource() .. '/tests', 'tests', 'read')
-  local unmount2 = love.filesystem.unmountFullPath(love.filesystem.getSource() .. '/tests')
-  test:assertTrue(unmount2, 'check unmounted')
+  love.filesystem.mount_full_path(love.filesystem.get_source() .. '/tests', 'tests', 'read')
+  local unmount2 = love.filesystem.unmount_full_path(love.filesystem.get_source() .. '/tests')
+  test:assert_true(unmount2, 'check unmounted')
 end
 
 
--- love.filesystem.mountCommonPath
-love.test.filesystem.mountCommonPath = function(test)
+-- love.filesystem.mount_common_path
+love.test.filesystem.mount_common_path = function(test)
   -- check if we can mount all the expected paths
-  local mount1 = love.filesystem.mountCommonPath('appsavedir', 'appsavedir', 'readwrite')
-  local mount2 = love.filesystem.mountCommonPath('appdocuments', 'appdocuments', 'readwrite')
-  local mount3 = love.filesystem.mountCommonPath('userhome', 'userhome', 'readwrite')
-  local mount4 = love.filesystem.mountCommonPath('userappdata', 'userappdata', 'readwrite')
+  local mount1 = love.filesystem.mount_common_path('appsavedir', 'appsavedir', 'readwrite')
+  local mount2 = love.filesystem.mount_common_path('appdocuments', 'appdocuments', 'readwrite')
+  local mount3 = love.filesystem.mount_common_path('userhome', 'userhome', 'readwrite')
+  local mount4 = love.filesystem.mount_common_path('userappdata', 'userappdata', 'readwrite')
   -- userdesktop isnt valid on linux
-  if not test:isOS('Linux') then
-    local mount5 = love.filesystem.mountCommonPath('userdesktop', 'userdesktop', 'readwrite')
-    test:assertTrue(mount5, 'check mount userdesktop')
+  if not test:is_os('Linux') then
+    local mount5 = love.filesystem.mount_common_path('userdesktop', 'userdesktop', 'readwrite')
+    test:assert_true(mount5, 'check mount userdesktop')
   end
-  local mount6 = love.filesystem.mountCommonPath('userdocuments', 'userdocuments', 'readwrite')
-  local ok = pcall(love.filesystem.mountCommonPath, 'fakepath', 'fake', 'readwrite')
-  test:assertFalse(mount1, 'check mount appsavedir') -- This is already mounted, we can't do it again.
-  test:assertTrue(mount2, 'check mount appdocuments')
-  test:assertTrue(mount3, 'check mount userhome')
-  test:assertTrue(mount4, 'check mount userappdata')
-  test:assertTrue(mount6, 'check mount userdocuments')
-  test:assertFalse(ok, 'check mount invalid common path fails')
+  local mount6 = love.filesystem.mount_common_path('userdocuments', 'userdocuments', 'readwrite')
+  local ok = pcall(love.filesystem.mount_common_path, 'fakepath', 'fake', 'readwrite')
+  test:assert_false(mount1, 'check mount appsavedir') -- This is already mounted, we can't do it again.
+  test:assert_true(mount2, 'check mount appdocuments')
+  test:assert_true(mount3, 'check mount userhome')
+  test:assert_true(mount4, 'check mount userappdata')
+  test:assert_true(mount6, 'check mount userdocuments')
+  test:assert_false(ok, 'check mount invalid common path fails')
 end
 
 
--- love.filesystem.unmountCommonPath
---love.test.filesystem.unmountCommonPath = function(test)
+-- love.filesystem.unmount_common_path
+--love.test.filesystem.unmount_common_path = function(test)
 --  -- check unmounting invalid
---  local ok = pcall(love.filesystem.unmountCommonPath, 'fakepath')
---  test:assertFalse(ok, 'check unmount invalid common path')
+--  local ok = pcall(love.filesystem.unmount_common_path, 'fakepath')
+--  test:assert_false(ok, 'check unmount invalid common path')
 --  -- check mounting valid paths
---  love.filesystem.mountCommonPath('appsavedir', 'appsavedir', 'read')
---  love.filesystem.mountCommonPath('appdocuments', 'appdocuments', 'read')
---  love.filesystem.mountCommonPath('userhome', 'userhome', 'read')
---  love.filesystem.mountCommonPath('userappdata', 'userappdata', 'read')
---  love.filesystem.mountCommonPath('userdesktop', 'userdesktop', 'read')
---  love.filesystem.mountCommonPath('userdocuments', 'userdocuments', 'read')
---  local unmount1 = love.filesystem.unmountCommonPath('appsavedir')
---  local unmount2 = love.filesystem.unmountCommonPath('appdocuments')
---  local unmount3 = love.filesystem.unmountCommonPath('userhome')
---  local unmount4 = love.filesystem.unmountCommonPath('userappdata')
---  local unmount5 = love.filesystem.unmountCommonPath('userdesktop')
---  local unmount6 = love.filesystem.unmountCommonPath('userdocuments')
---  test:assertTrue(unmount1, 'check unmount appsavedir')
---  test:assertTrue(unmount2, 'check unmount appdocuments')
---  test:assertTrue(unmount3, 'check unmount userhome')
---  test:assertTrue(unmount4, 'check unmount userappdata')
---  test:assertTrue(unmount5, 'check unmount userdesktop')
---  test:assertTrue(unmount6, 'check unmount userdocuments')
+--  love.filesystem.mount_common_path('appsavedir', 'appsavedir', 'read')
+--  love.filesystem.mount_common_path('appdocuments', 'appdocuments', 'read')
+--  love.filesystem.mount_common_path('userhome', 'userhome', 'read')
+--  love.filesystem.mount_common_path('userappdata', 'userappdata', 'read')
+--  love.filesystem.mount_common_path('userdesktop', 'userdesktop', 'read')
+--  love.filesystem.mount_common_path('userdocuments', 'userdocuments', 'read')
+--  local unmount1 = love.filesystem.unmount_common_path('appsavedir')
+--  local unmount2 = love.filesystem.unmount_common_path('appdocuments')
+--  local unmount3 = love.filesystem.unmount_common_path('userhome')
+--  local unmount4 = love.filesystem.unmount_common_path('userappdata')
+--  local unmount5 = love.filesystem.unmount_common_path('userdesktop')
+--  local unmount6 = love.filesystem.unmount_common_path('userdocuments')
+--  test:assert_true(unmount1, 'check unmount appsavedir')
+--  test:assert_true(unmount2, 'check unmount appdocuments')
+--  test:assert_true(unmount3, 'check unmount userhome')
+--  test:assert_true(unmount4, 'check unmount userappdata')
+--  test:assert_true(unmount5, 'check unmount userdesktop')
+--  test:assert_true(unmount6, 'check unmount userdocuments')
 --  -- remount or future tests fail
---  love.filesystem.mountCommonPath('appsavedir', 'appsavedir', 'readwrite')
---  love.filesystem.mountCommonPath('appdocuments', 'appdocuments', 'readwrite')
---  love.filesystem.mountCommonPath('userhome', 'userhome', 'readwrite')
---  love.filesystem.mountCommonPath('userappdata', 'userappdata', 'readwrite')
---  love.filesystem.mountCommonPath('userdesktop', 'userdesktop', 'readwrite')
---  love.filesystem.mountCommonPath('userdocuments', 'userdocuments', 'readwrite')
+--  love.filesystem.mount_common_path('appsavedir', 'appsavedir', 'readwrite')
+--  love.filesystem.mount_common_path('appdocuments', 'appdocuments', 'readwrite')
+--  love.filesystem.mount_common_path('userhome', 'userhome', 'readwrite')
+--  love.filesystem.mount_common_path('userappdata', 'userappdata', 'readwrite')
+--  love.filesystem.mount_common_path('userdesktop', 'userdesktop', 'readwrite')
+--  love.filesystem.mount_common_path('userdocuments', 'userdocuments', 'readwrite')
 --end
 
 
--- love.filesystem.openFile
+-- love.filesystem.open_file
 -- @NOTE this is just basic nil checking, objs have their own test method
-love.test.filesystem.openFile = function(test)
-  test:assertNotNil(love.filesystem.openFile('file2.txt', 'w'))
-  test:assertNotNil(love.filesystem.openFile('file2.txt', 'r'))
-  test:assertNotNil(love.filesystem.openFile('file2.txt', 'a'))
-  test:assertNotNil(love.filesystem.openFile('file2.txt', 'c'))
+love.test.filesystem.open_file = function(test)
+  test:assert_not_nil(love.filesystem.open_file('file2.txt', 'w'))
+  test:assert_not_nil(love.filesystem.open_file('file2.txt', 'r'))
+  test:assert_not_nil(love.filesystem.open_file('file2.txt', 'a'))
+  test:assert_not_nil(love.filesystem.open_file('file2.txt', 'c'))
   love.filesystem.remove('file2.txt')
 end
 
 
--- love.filesystem.newFileData
+-- love.filesystem.new_file_data
 -- @NOTE this is just basic nil checking, objs have their own test method
-love.test.filesystem.newFileData = function(test)
-  test:assertNotNil(love.filesystem.newFileData('helloworld', 'file1'))
+love.test.filesystem.new_file_data = function(test)
+  test:assert_not_nil(love.filesystem.new_file_data('helloworld', 'file1'))
 end
 
 
@@ -475,65 +475,65 @@ end
 love.test.filesystem.read = function(test)
   -- check reading a full file
   local content, size = love.filesystem.read('resources/test.txt')
-  test:assertNotEquals(nil, content, 'check not nil')
-  test:assertEquals('helloworld', content, 'check content match')
-  test:assertEquals(10, size, 'check size match')
+  test:assert_not_equals(nil, content, 'check not nil')
+  test:assert_equals('helloworld', content, 'check content match')
+  test:assert_equals(10, size, 'check size match')
   -- check reading partial file
   content, size = love.filesystem.read('resources/test.txt', 5)
-  test:assertNotEquals(nil, content, 'check not nil')
-  test:assertEquals('hello', content, 'check content match')
-  test:assertEquals(5, size, 'check size match')
+  test:assert_not_equals(nil, content, 'check not nil')
+  test:assert_equals('hello', content, 'check content match')
+  test:assert_equals(5, size, 'check size match')
 end
 
 
 -- love.filesystem.remove
 love.test.filesystem.remove = function(test)
   -- create a dir + subdir with a file
-  love.filesystem.createDirectory('foo/bar')
+  love.filesystem.create_directory('foo/bar')
   love.filesystem.write('foo/bar/file2.txt', 'helloworld')
   -- check removing files + dirs (should fail to remove dir if file inside)
-  test:assertFalse(love.filesystem.remove('foo'), 'check fail when file inside')
-  test:assertFalse(love.filesystem.remove('foo/bar'), 'check fail when file inside')
-  test:assertTrue(love.filesystem.remove('foo/bar/file2.txt'), 'check file removed')
-  test:assertTrue(love.filesystem.remove('foo/bar'), 'check subdirectory removed')
-  test:assertTrue(love.filesystem.remove('foo'), 'check directory removed')
+  test:assert_false(love.filesystem.remove('foo'), 'check fail when file inside')
+  test:assert_false(love.filesystem.remove('foo/bar'), 'check fail when file inside')
+  test:assert_true(love.filesystem.remove('foo/bar/file2.txt'), 'check file removed')
+  test:assert_true(love.filesystem.remove('foo/bar'), 'check subdirectory removed')
+  test:assert_true(love.filesystem.remove('foo'), 'check directory removed')
   -- cleanup not needed here hopefully...
 end
 
 
--- love.filesystem.setCRequirePath
-love.test.filesystem.setCRequirePath = function(test)
+-- love.filesystem.set_c_require_path
+love.test.filesystem.set_c_require_path = function(test)
   -- check setting path val is returned
-  love.filesystem.setCRequirePath('/??')
-  test:assertEquals('/??', love.filesystem.getCRequirePath(), 'check crequirepath value')
-  love.filesystem.setCRequirePath('??')
+  love.filesystem.set_c_require_path('/??')
+  test:assert_equals('/??', love.filesystem.get_c_require_path(), 'check crequirepath value')
+  love.filesystem.set_c_require_path('??')
 end
 
 
--- love.filesystem.setIdentity
-love.test.filesystem.setIdentity = function(test)
+-- love.filesystem.set_identity
+love.test.filesystem.set_identity = function(test)
   -- check setting identity val is returned
-  local original = love.filesystem.getIdentity()
-  love.filesystem.setIdentity('lover')
-  test:assertEquals('lover', love.filesystem.getIdentity(), 'check indentity value')
+  local original = love.filesystem.get_identity()
+  love.filesystem.set_identity('lover')
+  test:assert_equals('lover', love.filesystem.get_identity(), 'check indentity value')
   -- return value to original
-  love.filesystem.setIdentity(original)
+  love.filesystem.set_identity(original)
 end
 
 
--- love.filesystem.setRequirePath
-love.test.filesystem.setRequirePath = function(test)
+-- love.filesystem.set_require_path
+love.test.filesystem.set_require_path = function(test)
   -- check setting path val is returned
-  love.filesystem.setRequirePath('?.lua;?/start.lua')
-  test:assertEquals('?.lua;?/start.lua', love.filesystem.getRequirePath(), 'check require path')
+  love.filesystem.set_require_path('?.lua;?/start.lua')
+  test:assert_equals('?.lua;?/start.lua', love.filesystem.get_require_path(), 'check require path')
   -- reset to default
-  love.filesystem.setRequirePath('?.lua;?/init.lua')
+  love.filesystem.set_require_path('?.lua;?/init.lua')
 end
 
 
--- love.filesystem.setSource
-love.test.filesystem.setSource = function(test)
-  test:skipTest('used internally')
+-- love.filesystem.set_source
+love.test.filesystem.set_source = function(test)
+  test:skip_test('used internally')
 end
 
 
@@ -544,9 +544,9 @@ love.test.filesystem.unmount = function(test)
   love.filesystem.write('test.zip', contents, size)
   love.filesystem.mount('test.zip', 'test')
   -- check mounted, unmount, then check its unmounted
-  test:assertNotEquals(nil, love.filesystem.getInfo('test/test.txt'), 'check mount exists')
+  test:assert_not_equals(nil, love.filesystem.get_info('test/test.txt'), 'check mount exists')
   love.filesystem.unmount('test.zip')
-  test:assertEquals(nil, love.filesystem.getInfo('test/test.txt'), 'check unmounted')
+  test:assert_equals(nil, love.filesystem.get_info('test/test.txt'), 'check unmounted')
   -- cleanup
   love.filesystem.remove('test/test.txt')
   love.filesystem.remove('test')
@@ -560,9 +560,9 @@ love.test.filesystem.write = function(test)
   love.filesystem.write('test1.txt', 'helloworld')
   love.filesystem.write('test2.txt', 'helloworld', 10)
   love.filesystem.write('test3.txt', 'helloworld', 5)
-  test:assertEquals('helloworld', love.filesystem.read('test1.txt'), 'check read file')
-  test:assertEquals('helloworld', love.filesystem.read('test2.txt'), 'check read all')
-  test:assertEquals('hello', love.filesystem.read('test3.txt'), 'check read partial')
+  test:assert_equals('helloworld', love.filesystem.read('test1.txt'), 'check read file')
+  test:assert_equals('helloworld', love.filesystem.read('test2.txt'), 'check read all')
+  test:assert_equals('hello', love.filesystem.read('test3.txt'), 'check read partial')
   -- cleanup
   love.filesystem.remove('test1.txt')
   love.filesystem.remove('test2.txt')

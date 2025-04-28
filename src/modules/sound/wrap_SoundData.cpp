@@ -149,14 +149,14 @@ int w_SoundData_slice(lua_State *L)
 static const luaL_Reg w_SoundData_functions[] =
 {
 	{ "clone", w_SoundData_clone },
-	{ "getChannelCount", w_SoundData_getChannelCount },
-	{ "getBitDepth", w_SoundData_getBitDepth },
-	{ "getSampleRate", w_SoundData_getSampleRate },
-	{ "getSampleCount", w_SoundData_getSampleCount },
-	{ "getDuration", w_SoundData_getDuration },
-	{ "setSample", w_SoundData_setSample },
-	{ "getSample", w_SoundData_getSample },
-	{ "copyFrom", w_SoundData_copyFrom },
+	{ "get_channel_count", w_SoundData_getChannelCount },
+	{ "get_bit_depth", w_SoundData_getBitDepth },
+	{ "get_sample_rate", w_SoundData_getSampleRate },
+	{ "get_sample_count", w_SoundData_getSampleCount },
+	{ "get_duration", w_SoundData_getDuration },
+	{ "set_sample", w_SoundData_setSample },
+	{ "get_sample", w_SoundData_getSample },
+	{ "copy_from", w_SoundData_copyFrom },
 	{ "slice", w_SoundData_slice },
 
 	{ 0, 0 }

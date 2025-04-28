@@ -287,16 +287,16 @@ static FFI_ImageData ffifuncs =
 static const luaL_Reg w_ImageData_functions[] =
 {
 	{ "clone", w_ImageData_clone },
-	{ "getFormat", w_ImageData_getFormat },
-	{ "setLinear", w_ImageData_setLinear },
-	{ "isLinear", w_ImageData_isLinear },
-	{ "getWidth", w_ImageData_getWidth },
-	{ "getHeight", w_ImageData_getHeight },
-	{ "getDimensions", w_ImageData_getDimensions },
-	{ "getPixel", w_ImageData_getPixel },
-	{ "setPixel", w_ImageData_setPixel },
+	{ "get_format", w_ImageData_getFormat },
+	{ "set_linear", w_ImageData_setLinear },
+	{ "is_linear", w_ImageData_isLinear },
+	{ "get_width", w_ImageData_getWidth },
+	{ "get_height", w_ImageData_getHeight },
+	{ "get_dimensions", w_ImageData_getDimensions },
+	{ "get_pixel", w_ImageData_getPixel },
+	{ "set_pixel", w_ImageData_setPixel },
 	{ "paste", w_ImageData_paste },
-	{ "mapPixel", w_ImageData_mapPixel },
+	{ "map_pixel", w_ImageData_mapPixel },
 	{ "encode", w_ImageData_encode },
 	{ 0, 0 }
 };

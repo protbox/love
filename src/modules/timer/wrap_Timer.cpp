@@ -70,11 +70,11 @@ int w_getTime(lua_State *L)
 static const luaL_Reg functions[] =
 {
 	{ "step", w_step },
-	{ "getDelta", w_getDelta },
-	{ "getFPS", w_getFPS },
-	{ "getAverageDelta", w_getAverageDelta },
+	{ "get_delta", w_getDelta },
+	{ "get_fps", w_getFPS },
+	{ "get_average_delta", w_getAverageDelta },
 	{ "sleep", w_sleep },
-	{ "getTime", w_getTime },
+	{ "get_time", w_getTime },
 	{ 0, 0 }
 };
 

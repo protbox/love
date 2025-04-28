@@ -111,14 +111,14 @@ int w_VideoStream_isPlaying(lua_State *L)
 
 static const luaL_Reg videostream_functions[] =
 {
-	{ "setSync", w_VideoStream_setSync },
-	{ "getFilename", w_VideoStream_getFilename },
+	{ "set_sync", w_VideoStream_setSync },
+	{ "get_filename", w_VideoStream_getFilename },
 	{ "play", w_VideoStream_play },
 	{ "pause", w_VideoStream_pause },
 	{ "seek", w_VideoStream_seek },
 	{ "rewind", w_VideoStream_rewind },
 	{ "tell", w_VideoStream_tell },
-	{ "isPlaying", w_VideoStream_isPlaying },
+	{ "is_playing", w_VideoStream_isPlaying },
 	{ 0, 0 }
 };
 

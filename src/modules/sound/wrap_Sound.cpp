@@ -118,8 +118,8 @@ int w_newSoundData(lua_State *L)
 // List of functions to wrap.
 static const luaL_Reg functions[] =
 {
-	{ "newDecoder",  w_newDecoder },
-	{ "newSoundData",  w_newSoundData },
+	{ "new_decoder", w_newDecoder },
+	{ "new_sound_data", w_newSoundData },
 	{ 0, 0 }
 };
 

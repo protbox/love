@@ -55,7 +55,7 @@ int w_Cursor_getType(lua_State *L)
 
 static const luaL_Reg w_Cursor_functions[] =
 {
-	{ "getType", w_Cursor_getType },
+	{ "get_type", w_Cursor_getType },
 	{ 0, 0 },
 };
 

@@ -77,12 +77,12 @@ int w_GraphicsReadback_getImageData(lua_State *L)
 
 static const luaL_Reg w_GraphicsReadback_functions[] =
 {
-	{ "isComplete", w_GraphicsReadback_isComplete },
-	{ "hasError", w_GraphicsReadback_hasError },
+	{ "is_complete", w_GraphicsReadback_isComplete },
+	{ "has_error", w_GraphicsReadback_hasError },
 	{ "wait", w_GraphicsReadback_wait },
 	{ "update", w_GraphicsReadback_update },
-	{ "getBufferData", w_GraphicsReadback_getBufferData },
-	{ "getImageData", w_GraphicsReadback_getImageData },
+	{ "get_buffer_data", w_GraphicsReadback_getBufferData },
+	{ "get_image_data", w_GraphicsReadback_getImageData },
 	{ 0, 0 }
 };
 

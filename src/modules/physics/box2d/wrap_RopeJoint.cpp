@@ -52,8 +52,8 @@ int w_RopeJoint_setMaxLength(lua_State *L)
 	
 static const luaL_Reg w_RopeJoint_functions[] =
 {
-	{ "getMaxLength", w_RopeJoint_getMaxLength },
-	{ "setMaxLength", w_RopeJoint_setMaxLength },
+	{ "get_max_length", w_RopeJoint_getMaxLength },
+	{ "set_max_length", w_RopeJoint_setMaxLength },
 	{ 0, 0 }
 };
 

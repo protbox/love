@@ -112,16 +112,16 @@ int w_MotorJoint_getCorrectionFactor(lua_State *L)
 
 static const luaL_Reg w_MotorJoint_functions[] =
 {
-	{ "setLinearOffset", w_MotorJoint_setLinearOffset },
-	{ "getLinearOffset", w_MotorJoint_getLinearOffset },
-	{ "setAngularOffset", w_MotorJoint_setAngularOffset },
-	{ "getAngularOffset", w_MotorJoint_getAngularOffset },
-	{ "setMaxForce", w_MotorJoint_setMaxForce },
-	{ "getMaxForce", w_MotorJoint_getMaxForce },
-	{ "setMaxTorque", w_MotorJoint_setMaxTorque },
-	{ "getMaxTorque", w_MotorJoint_getMaxTorque },
-	{ "setCorrectionFactor", w_MotorJoint_setCorrectionFactor },
-	{ "getCorrectionFactor", w_MotorJoint_getCorrectionFactor },
+	{ "set_linear_offset", w_MotorJoint_setLinearOffset },
+	{ "get_linear_offset", w_MotorJoint_getLinearOffset },
+	{ "set_angular_offset", w_MotorJoint_setAngularOffset },
+	{ "get_angular_offset", w_MotorJoint_getAngularOffset },
+	{ "set_max_force", w_MotorJoint_setMaxForce },
+	{ "get_max_force", w_MotorJoint_getMaxForce },
+	{ "set_max_torque", w_MotorJoint_setMaxTorque },
+	{ "get_max_torque", w_MotorJoint_getMaxTorque },
+	{ "set_correction_factor", w_MotorJoint_setCorrectionFactor },
+	{ "get_correction_factor", w_MotorJoint_getCorrectionFactor },
 	{ 0, 0 }
 };
 

@@ -193,11 +193,11 @@ static const luaL_Reg w_TextBatch_functions[] =
 	{ "add", w_TextBatch_add },
 	{ "addf", w_TextBatch_addf },
 	{ "clear", w_TextBatch_clear },
-	{ "setFont", w_TextBatch_setFont },
-	{ "getFont", w_TextBatch_getFont },
-	{ "getWidth", w_TextBatch_getWidth },
-	{ "getHeight", w_TextBatch_getHeight },
-	{ "getDimensions", w_TextBatch_getDimensions },
+	{ "set_font", w_TextBatch_setFont },
+	{ "get_font", w_TextBatch_getFont },
+	{ "get_width", w_TextBatch_getWidth },
+	{ "get_height", w_TextBatch_getHeight },
+	{ "get_dimensions", w_TextBatch_getDimensions },
 	{ 0, 0 }
 };
 

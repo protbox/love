@@ -270,20 +270,20 @@ int w_Font_getDPIScale(lua_State *L)
 
 static const luaL_Reg w_Font_functions[] =
 {
-	{ "getHeight", w_Font_getHeight },
-	{ "getWidth", w_Font_getWidth },
-	{ "getWrap", w_Font_getWrap },
-	{ "setLineHeight", w_Font_setLineHeight },
-	{ "getLineHeight", w_Font_getLineHeight },
-	{ "setFilter", w_Font_setFilter },
-	{ "getFilter", w_Font_getFilter },
-	{ "getAscent", w_Font_getAscent },
-	{ "getDescent", w_Font_getDescent },
-	{ "getBaseline", w_Font_getBaseline },
-	{ "hasGlyphs", w_Font_hasGlyphs },
-	{ "getKerning", w_Font_getKerning },
-	{ "setFallbacks", w_Font_setFallbacks },
-	{ "getDPIScale", w_Font_getDPIScale },
+	{ "get_height", w_Font_getHeight },
+	{ "get_width", w_Font_getWidth },
+	{ "get_wrap", w_Font_getWrap },
+	{ "set_line_height", w_Font_setLineHeight },
+	{ "get_line_height", w_Font_getLineHeight },
+	{ "set_filter", w_Font_setFilter },
+	{ "get_filter", w_Font_getFilter },
+	{ "get_ascent", w_Font_getAscent },
+	{ "get_descent", w_Font_getDescent },
+	{ "get_baseline", w_Font_getBaseline },
+	{ "has_glyphs", w_Font_hasGlyphs },
+	{ "get_kerning", w_Font_getKerning },
+	{ "set_fallbacks", w_Font_setFallbacks },
+	{ "get_dpi_scale", w_Font_getDPIScale },
 	{ 0, 0 }
 };
 

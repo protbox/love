@@ -58,8 +58,8 @@ int w_FileData_getExtension(lua_State *L)
 static const luaL_Reg w_FileData_functions[] =
 {
 	{ "clone", w_FileData_clone },
-	{ "getFilename", w_FileData_getFilename },
-	{ "getExtension", w_FileData_getExtension },
+	{ "get_filename", w_FileData_getFilename },
+	{ "get_extension", w_FileData_getExtension },
 
 	{ 0, 0 }
 };

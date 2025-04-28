@@ -445,17 +445,17 @@ static const luaL_Reg functions[] =
 {
 	// love.math.random etc. are defined in wrap_Math.lua.
 
-	{ "_getRandomGenerator", w__getRandomGenerator },
-	{ "newRandomGenerator", w_newRandomGenerator },
-	{ "newBezierCurve", w_newBezierCurve },
-	{ "newTransform", w_newTransform },
+	{ "_get_random_generator", w__getRandomGenerator },
+	{ "new_random_generator", w_newRandomGenerator },
+	{ "new_bezier_curve", w_newBezierCurve },
+	{ "new_transform", w_newTransform },
 	{ "triangulate", w_triangulate },
-	{ "isConvex", w_isConvex },
-	{ "gammaToLinear", w_gammaToLinear },
-	{ "linearToGamma", w_linearToGamma },
+	{ "is_convex", w_isConvex },
+	{ "gamma_to_linear", w_gammaToLinear },
+	{ "linear_to_gamma", w_linearToGamma },
 	{ "noise", w_noise },
-	{ "perlinNoise", w_perlinNoise },
-	{ "simplexNoise", w_simplexNoise },
+	{ "perlin_noise", w_perlinNoise },
+	{ "simplex_noise", w_simplexNoise },
 
 	{ 0, 0 }
 };

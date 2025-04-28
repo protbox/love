@@ -157,10 +157,10 @@ static const luaL_Reg w_Channel_functions[] =
 	{ "pop", w_Channel_pop },
 	{ "demand", w_Channel_demand },
 	{ "peek", w_Channel_peek },
-	{ "getCount", w_Channel_getCount },
-	{ "hasRead", w_Channel_hasRead },
+	{ "get_count", w_Channel_getCount },
+	{ "has_read", w_Channel_hasRead },
 	{ "clear", w_Channel_clear },
-	{ "performAtomic", w_Channel_performAtomic },
+	{ "perform_atomic", w_Channel_performAtomic },
 	{ 0, 0 }
 };
 

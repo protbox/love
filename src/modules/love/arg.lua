@@ -65,8 +65,8 @@ function love.path.abs(p)
 end
 
 -- Converts any path into a full path.
-function love.path.getFull(p)
-	p = love.filesystem.canonicalizeRealPath(p)
+function love.path.get_full(p)
+	p = love.filesystem.canonicalize_real_path(p)
 	p = love.path.normalslashes(p)
 	return p
 end
@@ -91,7 +91,7 @@ end
 
 -- Finds the key in the table with the lowest integral index. The lowest
 -- will typically the executable, for instance "lua5.1.exe".
-function love.arg.getLow(a)
+function love.arg.get_low(a)
 	local m = math.huge
 	for k,v in pairs(a) do
 		if k < m then
@@ -109,15 +109,15 @@ love.arg.options = {
 	excluderenderers = { a = 1 },
 }
 
-love.arg.optionIndices = {}
+love.arg.option_indices = {}
 
-function love.arg.parseOption(m, i)
+function love.arg.parse_option(m, i)
 	m.set = true
 
 	if m.a > 0 then
 		m.arg = {}
 		for j=i,i+m.a-1 do
-			love.arg.optionIndices[j] = true
+			love.arg.option_indices[j] = true
 			table.insert(m.arg, arg[j])
 		end
 	end
@@ -125,7 +125,7 @@ function love.arg.parseOption(m, i)
 	return m.a
 end
 
-function love.arg.parseOptions(arg)
+function love.arg.parse_options(arg)
 
 	local game
 	local argc = #arg
@@ -136,10 +136,10 @@ function love.arg.parseOptions(arg)
 		local m = arg[i]:match("^%-%-(.*)")
 
 		if m and m ~= "" and love.arg.options[m] and not love.arg.options[m].set then
-			love.arg.optionIndices[i] = true
-			i = i + love.arg.parseOption(love.arg.options[m], i+1)
+			love.arg.option_indices[i] = true
+			i = i + love.arg.parse_option(love.arg.options[m], i+1)
 		elseif m == "" then -- handle '--' as an option
-			love.arg.optionIndices[i] = true
+			love.arg.option_indices[i] = true
 			if not game then -- handle '--' followed by game name
 				game = i + 1
 			end
@@ -151,20 +151,20 @@ function love.arg.parseOptions(arg)
 	end
 
 	if not love.arg.options.game.set then
-		love.arg.parseOption(love.arg.options.game, game or 0)
+		love.arg.parse_option(love.arg.options.game, game or 0)
 	end
 end
 
 -- Returns the arguments that are passed to your game via love.load()
 -- arguments that were parsed as options are skipped.
-function love.arg.parseGameArguments(a)
+function love.arg.parse_game_arguments(a)
 	local out = {}
 
-	local _, lowindex = love.arg.getLow(a)
+	local _, lowindex = love.arg.get_low(a)
 
 	local o = lowindex
 	for i=lowindex, #a do
-		if not love.arg.optionIndices[i] then
+		if not love.arg.option_indices[i] then
 			out[o] = a[i]
 			o = o + 1
 		end

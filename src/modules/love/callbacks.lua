@@ -144,7 +144,7 @@ function love.createhandlers()
 		end,
 		audiodisconnected = function (sources)
 			if not love.audiodisconnected or not love.audiodisconnected(sources) then
-				love.audio.setPlaybackDevice()
+				love.audio.set_playback_device()
 			end
 		end,
 		sensorupdated = function (sensorType, x, y, z)
@@ -189,9 +189,9 @@ function love.run()
 		-- Call update and draw
 		if love.update then love.update(dt) end -- will pass 0 if love.timer is disabled
 
-		if love.graphics and love.graphics.isActive() then
+		if love.graphics and love.graphics.is_active() then
 			love.graphics.origin()
-			love.graphics.clear(love.graphics.getBackgroundColor())
+			love.graphics.clear(love.graphics.get_background_color())
 
 			if love.draw then love.draw() end
 
@@ -224,8 +224,8 @@ function love.errorhandler(msg)
 		return
 	end
 
-	if not love.graphics.isCreated() or not love.window.isOpen() then
-		local success, status = pcall(love.window.setMode, 800, 600)
+	if not love.graphics.is_created() or not love.window.is_open() then
+		local success, status = pcall(love.window.set_mode, 800, 600)
 		if not success or not status then
 			return
 		end
@@ -233,25 +233,25 @@ function love.errorhandler(msg)
 
 	-- Reset state.
 	if love.mouse then
-		love.mouse.setVisible(true)
-		love.mouse.setGrabbed(false)
-		love.mouse.setRelativeMode(false)
-		if love.mouse.isCursorSupported() then
-			love.mouse.setCursor()
+		love.mouse.set_visible(true)
+		love.mouse.set_grabbed(false)
+		love.mouse.set_relative_mode(false)
+		if love.mouse.is_cursor_supported() then
+			love.mouse.set_cursor()
 		end
 	end
 	if love.joystick then
 		-- Stop all joystick vibrations.
-		for i,v in ipairs(love.joystick.getJoysticks()) do
-			v:setVibration()
+		for i,v in ipairs(love.joystick.get_joysticks()) do
+			v:set_vibration()
 		end
 	end
 	if love.audio then love.audio.stop() end
 
 	love.graphics.reset()
-	love.graphics.setFont(love.graphics.newFont(15))
+	love.graphics.set_font(love.graphics.new_font(15))
 
-	love.graphics.setColor(1, 1, 1)
+	love.graphics.set_color(1, 1, 1)
 
 	local trace = debug.traceback()
 
@@ -287,17 +287,17 @@ function love.errorhandler(msg)
 	p = p:gsub("%[string \"(.-)\"%]", "%1")
 
 	local function draw()
-		if not love.graphics.isActive() then return end
+		if not love.graphics.is_active() then return end
 		local pos = 70
 		love.graphics.clear(89/255, 157/255, 220/255)
-		love.graphics.printf(p, pos, pos, love.graphics.getWidth() - pos)
+		love.graphics.printf(p, pos, pos, love.graphics.get_width() - pos)
 		love.graphics.present()
 	end
 
 	local fullErrorText = p
 	local function copyToClipboard()
 		if not love.system then return end
-		love.system.setClipboardText(fullErrorText)
+		love.system.set_clipboard_text(fullErrorText)
 		p = p .. "\nCopied to clipboard!"
 	end
 
@@ -313,16 +313,16 @@ function love.errorhandler(msg)
 				return 1
 			elseif e == "keypressed" and a == "escape" then
 				return 1
-			elseif e == "keypressed" and a == "c" and love.keyboard.isDown("lctrl", "rctrl") then
+			elseif e == "keypressed" and a == "c" and love.keyboard.is_down("lctrl", "rctrl") then
 				copyToClipboard()
 			elseif e == "touchpressed" then
-				local name = love.window.getTitle()
+				local name = love.window.get_title()
 				if #name == 0 or name == "Untitled" then name = "Game" end
 				local buttons = {"OK", "Cancel"}
 				if love.system then
 					buttons[3] = "Copy to clipboard"
 				end
-				local pressed = love.window.showMessageBox("Quit "..name.."?", "", buttons)
+				local pressed = love.window.show_message_box("Quit "..name.."?", "", buttons)
 				if pressed == 1 then
 					return 1
 				elseif pressed == 3 then

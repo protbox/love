@@ -226,8 +226,8 @@ static const luaL_Reg functions[] =
 	{ "clear", w_clear },
 	{ "quit", w_quit },
 	{ "restart", w_restart },
-	{ "setModalDrawCallback", w_setModalDrawCallback },
-	{ "_setDefaultModalDrawCallback", w__setDefaultModalDrawCallback },
+	{ "set_modal_draw_callback", w_setModalDrawCallback },
+	{ "_set_default_modal_draw_callback", w__setDefaultModalDrawCallback },
 	{ 0, 0 }
 };
 

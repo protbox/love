@@ -141,10 +141,10 @@ int w_newCubeFaces(lua_State *L)
 // List of functions to wrap.
 static const luaL_Reg functions[] =
 {
-	{ "newImageData",  w_newImageData },
-	{ "newCompressedData", w_newCompressedData },
-	{ "isCompressed", w_isCompressed },
-	{ "newCubeFaces", w_newCubeFaces },
+	{ "new_image_data", w_newImageData },
+	{ "new_compressed_data", w_newCompressedData },
+	{ "is_compressed", w_isCompressed },
+	{ "new_cube_faces", w_newCubeFaces },
 	{ 0, 0 }
 };
 

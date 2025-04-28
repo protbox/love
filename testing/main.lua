@@ -36,7 +36,7 @@ love.load = function(args)
 
   -- setup basic img to display
   if love.window ~= nil then
-    love.window.updateMode(360, 240, {
+    love.window.update_mode(360, 240, {
       fullscreen = false,
       resizable = true,
       centered = true
@@ -44,15 +44,15 @@ love.load = function(args)
 
     -- set up some graphics to draw if enabled
     if love.graphics ~= nil then
-      love.graphics.setDefaultFilter("nearest", "nearest")
-      love.graphics.setLineStyle('rough')
-      love.graphics.setLineWidth(1)
+      love.graphics.set_default_filter("nearest", "nearest")
+      love.graphics.set_line_style('rough')
+      love.graphics.set_line_width(1)
       Logo = {
-        texture = love.graphics.newImage('resources/love.png'),
+        texture = love.graphics.new_image('resources/love.png'),
         img = nil
       }
-      Logo.img = love.graphics.newQuad(0, 0, 64, 64, Logo.texture)
-      Font = love.graphics.newFont('resources/font.ttf', 8, 'normal')
+      Logo.img = love.graphics.new_quad(0, 0, 64, 64, Logo.texture)
+      Font = love.graphics.new_font('resources/font.ttf', 8, 'normal')
       TextCommand = 'Loading...'
       TextRun = ''
     end
@@ -60,8 +60,8 @@ love.load = function(args)
   end
 
   -- mount for output later
-  if love.filesystem.mountFullPath then
-    love.filesystem.mountFullPath(love.filesystem.getSource() .. "/output", "tempoutput", "readwrite")
+  if love.filesystem.mount_full_path then
+    love.filesystem.mount_full_path(love.filesystem.get_source() .. "/output", "tempoutput", "readwrite")
   end
 
   -- get all args with any comma lists split out as seperate
@@ -164,7 +164,7 @@ love.load = function(args)
   else 
     -- start first module
     TextCommand = testcmd
-    love.test.module:runTests()
+    love.test.module:run_tests()
   end
 
 end
@@ -172,17 +172,17 @@ end
 -- love.update
 -- run test suite logic 
 love.update = function(delta)
-  love.test:runSuite(delta)
+  love.test:run_suite(delta)
 end
 
 
 -- love.draw
 -- draw a little logo to the screen
 love.draw = function()
-  local lw = (love.graphics.getWidth() - 128) / 2
-  local lh = (love.graphics.getHeight() - 128) / 2
+  local lw = (love.graphics.get_width() - 128) / 2
+  local lh = (love.graphics.get_height() - 128) / 2
   love.graphics.draw(Logo.texture, Logo.img, lw, lh, 0, 2, 2)
-  love.graphics.setFont(Font)
+  love.graphics.set_font(Font)
   love.graphics.print(TextCommand, 4, 12, 0, 2, 2)
   love.graphics.print(TextRun, 4, 32, 0, 2, 2)
 end

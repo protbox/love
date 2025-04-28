@@ -127,11 +127,11 @@ int w_isMouse(lua_State *L)
 
 static const luaL_Reg functions[] =
 {
-	{ "getTouches", w_getTouches },
-	{ "getPosition", w_getPosition },
-	{ "getPressure", w_getPressure },
-	{ "getDeviceType", w_getDeviceType },
-	{ "isMouse", w_isMouse },
+	{ "get_touches", w_getTouches },
+	{ "get_position", w_getPosition },
+	{ "get_pressure", w_getPressure },
+	{ "get_device_type", w_getDeviceType },
+	{ "is_mouse", w_isMouse },
 	{ 0, 0 }
 };
 
